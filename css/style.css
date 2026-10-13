@@ -1404,3 +1404,149 @@ textarea.form-control {
     padding: 1.25rem;
   }
 }
+
+/* ==========================================================================
+   EFFETS 3D (RÉSERVÉS EXCLUSIVEMENT AUX CARTES DE PROJETS)
+   ========================================================================== */
+
+/* 3D Perspective Context - Uniquement sur les cartes de projets */
+.project-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  background: radial-gradient(600px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(99, 102, 241, 0.12), transparent 45%), var(--bg-card);
+}
+
+/* 3D Parallax Stacking of Content dans les projets */
+.project-card .project-thumb-wrapper,
+.project-card .project-title,
+.project-card .project-featured-badge {
+  transform: translateZ(24px);
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease;
+}
+
+.project-card .project-actions {
+  transform: translateZ(32px);
+}
+
+/* Specular 3D Glare Layer (Hologramme réservé aux projets) */
+.project-card .card-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 15;
+  opacity: 0;
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease;
+}
+
+/* Animations d'élévation légères */
+@keyframes levitateBadge {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.project-featured-badge {
+  animation: levitateBadge 3s ease-in-out infinite;
+}
+
+.status-badge {
+  animation: levitateBadge 4s ease-in-out infinite;
+}
+
+/* Scroll-Driven Smooth Reveal */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-init.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tactile Buttons with Shine Sweeps */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: rotate(25deg);
+  transition: none;
+  pointer-events: none;
+}
+
+.btn:hover::after {
+  left: 140%;
+  transition: left 0.75s ease-in-out;
+}
+
+.btn:active {
+  transform: scale(0.97) translateY(2px) !important;
+}
+
+/* Cyber HUD Status Bar (Game Engine Feel) */
+.cyber-hud-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--cyan);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.cyber-hud-bar .equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.cyber-hud-bar .eq-bar {
+  width: 3px;
+  background: var(--cyan);
+  border-radius: 1px;
+  animation: eqBounce 1.2s ease-in-out infinite alternate;
+}
+
+.cyber-hud-bar .eq-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+.cyber-hud-bar .eq-bar:nth-child(2) { height: 80%; animation-delay: 0.3s; }
+.cyber-hud-bar .eq-bar:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+.cyber-hud-bar .eq-bar:nth-child(4) { height: 100%; animation-delay: 0.4s; }
+
+@keyframes eqBounce {
+  0% { height: 25%; }
+  100% { height: 100%; }
+}

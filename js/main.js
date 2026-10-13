@@ -5,7 +5,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initParticleCanvas();
   renderProfileAndConfig();
   renderSkills();
   renderTimeline();
@@ -15,79 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initEmailCopy();
   initContactForm();
+  init3DTiltEffects();
+  initScrollReveal();
 });
-
-/* ====================================================================
-   1. PARTICLES & CYBER CANVAS (BACKGROUND HERO)
-   ==================================================================== */
-function initParticleCanvas() {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
-
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
-
-  const particles = [];
-  const particleCount = Math.min(Math.floor(width / 22), 65);
-
-  for (let i = 0; i < particleCount; i++) {
-    particles.push({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.6,
-      vy: (Math.random() - 0.5) * 0.6,
-      radius: Math.random() * 2 + 1,
-      color: Math.random() > 0.5 ? 'rgba(6, 182, 212, ' : 'rgba(99, 102, 241, '
-    });
-  }
-
-  let animationFrameId;
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-
-      if (p.x < 0) p.x = width;
-      if (p.x > width) p.x = 0;
-      if (p.y < 0) p.y = height;
-      if (p.y > height) p.y = 0;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = p.color + '0.7)';
-      ctx.fill();
-
-      // Connecter les points proches
-      for (let j = i + 1; j < particles.length; j++) {
-        const p2 = particles[j];
-        const dx = p.x - p2.x;
-        const dy = p.y - p2.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 110) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(99, 102, 241, ${0.18 * (1 - dist / 110)})`;
-          ctx.lineWidth = 0.8;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    animationFrameId = requestAnimationFrame(animate);
-  }
-
-  animate();
-}
 
 /* ====================================================================
    2. RENDU DU PROFIL & CONFIGURATION (DEPUIS CONFIG.JS)
@@ -342,6 +271,11 @@ function renderProjects() {
       </article>
     `;
   }).join('');
+
+  init3DTiltEffects();
+  if (typeof initScrollReveal === 'function') {
+    initScrollReveal();
+  }
 }
 
 function initProjectsFilterAndSearch() {
@@ -607,3 +541,114 @@ function initContactForm() {
     showToast('Votre client mail a été ouvert avec le message !');
   });
 }
+
+/* ====================================================================
+   10. EFFET 3D TILT & HOLOGRAMME GLARE (RÉSERVÉ AUX CARTES PROJETS)
+   ==================================================================== */
+function init3DTiltEffects() {
+  // Uniquement sur les cartes de projets !
+  const cards = document.querySelectorAll('.project-card');
+
+  cards.forEach(card => {
+    // Éviter les écouteurs dupliqués
+    if (card.dataset.tiltInitialized) return;
+    card.dataset.tiltInitialized = 'true';
+
+    // Injection de la couche de reflet spéculaire 3D (Holographic Glare)
+    let glare = card.querySelector('.card-glare');
+    if (!glare) {
+      glare = document.createElement('div');
+      glare.className = 'card-glare';
+      card.appendChild(glare);
+    }
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      // Inclinaison 3D max : 11 degrés
+      const maxTilt = 11;
+      const rotateX = -((y - centerY) / centerY) * maxTilt;
+      const rotateY = ((x - centerX) / centerX) * maxTilt;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.025, 1.025, 1.025)`;
+
+      // Reflet spéculaire dynamique
+      const glareX = (x / rect.width) * 100;
+      const glareY = (y / rect.height) * 100;
+      glare.style.opacity = '1';
+      glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 65%)`;
+
+      // Spotlight Bento
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      if (glare) glare.style.opacity = '0';
+    });
+  });
+}
+
+/* ====================================================================
+   12. ANIMATIONS DE SCROLL (REVEAL 3D EN CASCADE)
+   ==================================================================== */
+function initScrollReveal() {
+  const elements = document.querySelectorAll(
+    '.section-header, .project-card, .skill-category-card, .stat-box, .timeline-item, .contact-card, .about-text'
+  );
+
+  elements.forEach((el) => {
+    if (!el.classList.contains('reveal-init')) {
+      el.classList.add('reveal-init');
+    }
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        if (entry.target.classList.contains('stat-box')) {
+          animateStatBox(entry.target);
+        }
+      }
+    });
+  }, { threshold: 0.12 });
+
+  elements.forEach(el => observer.observe(el));
+}
+
+function animateStatBox(box) {
+  if (box.dataset.animated) return;
+  box.dataset.animated = 'true';
+  const numEl = box.querySelector('.stat-number');
+  if (!numEl) return;
+  const original = numEl.textContent.trim();
+
+  // Animation si nombre
+  const match = original.match(/^(\d+)(.*)$/);
+  if (match) {
+    const target = parseInt(match[1], 10);
+    const suffix = match[2];
+    let current = 0;
+    const duration = 1100;
+    const stepTime = 30;
+    const steps = duration / stepTime;
+    const increment = target / steps;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+        numEl.textContent = original;
+      } else {
+        numEl.textContent = Math.floor(current) + suffix;
+      }
+    }, stepTime);
+  }
+}
+
