@@ -142,11 +142,22 @@ function renderProfileAndConfig() {
   const contactEmailText = document.getElementById('contact-email-text');
   if (contactEmailText) contactEmailText.textContent = profile.email;
 
+  const contactPhoneText = document.getElementById('contact-phone-text');
+  if (contactPhoneText && profile.phone) contactPhoneText.textContent = profile.phone;
+
+  const contactLocationText = document.getElementById('contact-location-text');
+  if (contactLocationText && profile.location) contactLocationText.textContent = profile.location;
+
   const contactGithubLink = document.getElementById('contact-github-link');
   if (contactGithubLink && socials.github) contactGithubLink.href = socials.github;
 
   const contactLinkedinLink = document.getElementById('contact-linkedin-link');
-  if (contactLinkedinLink && socials.linkedin) contactLinkedinLink.href = socials.linkedin;
+  if (contactLinkedinLink && socials.linkedin) {
+    contactLinkedinLink.href = socials.linkedin;
+    contactLinkedinLink.style.display = 'flex';
+  } else if (contactLinkedinLink) {
+    contactLinkedinLink.style.display = 'none';
+  }
 
   const contactItchioLink = document.getElementById('contact-itchio-link');
   if (contactItchioLink && socials.itchio) {

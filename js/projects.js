@@ -1,201 +1,180 @@
 /**
  * ====================================================================
- * LISTE DES PROJETS DU PORTFOLIO
+ * PROJETS DU PORTFOLIO - ORONTE SOLER
  * ====================================================================
- * Ajoutez, modifiez ou supprimez vos projets ci-dessous.
- * Chaque projet peut avoir :
- * - Une image, un GIF ou une vidéo (locale .mp4/.webm ou YouTube/Vimeo)
- * - Une galerie d'images/vidéos additionnelles dans la pop-up de détails
- * - Des tags et catégories pour le filtrage
- * - Des points techniques détaillés (Architecture, Algorithmes, Outils)
- * - Des liens vers GitHub, Itch.io, Steam, Vidéo YouTube, etc.
+ * Projets réels issus du profil GitHub : https://github.com/Oronte
+ * et du CV (Objectif3D, KrampusEngine, Serious Game La Poste, etc.)
  */
 
 window.PORTFOLIO_PROJECTS = [
   {
-    id: "chrono-protocol",
-    title: "Chrono Protocol",
-    category: "unreal", // Valeurs possibles : "unreal", "unity", "native", "tools"
-    categoryLabel: "Unreal Engine 5 & C++",
-    engine: "Unreal Engine 5.3",
-    languages: ["C++", "HLSL", "Blueprints"],
-    role: "Lead Programmer & Tech Designer",
-    year: "2024",
-    pinned: true, // Met le projet en avant avec un badge "Featured"
+    id: "krampus-engine",
+    title: "KrampusEngine",
+    category: "native",
+    categoryLabel: "C++20 & Moteur 2D",
+    engine: "Moteur Maison (Static Library)",
+    languages: ["C++20", "SFML 3.0.0"],
+    role: "Créateur & Lead Engine Programmer",
+    year: "2026",
+    pinned: true,
     
-    // Vignette principale (Image ou GIF)
+    // Vignette animée directement avec l'un des GIFs réels du projet
+    thumbnail: "assets/images/projects/krampus-physics.gif",
+    
+    mainMedia: {
+      type: "gif",
+      url: "assets/images/projects/krampus-physics.gif",
+      caption: "Moteur physique 2D avec forces, gravité et amortissement dans KrampusEngine"
+    },
+
+    shortDescription: "Moteur de jeu 2D moderne développé en C++20 et SFML 3.0. Architecture hybride Acteur / Composant, moteur physique sur-mesure et système de collisions.",
+    
+    fullDescription: `
+      <p><strong>KrampusEngine</strong> est un moteur de jeu 2D expérimental écrit en <strong>C++20 moderne</strong> et reposant sur <strong>SFML 3.0.0</strong>.</p>
+      <p>Conçu sous forme de <strong>bibliothèque statique (.lib)</strong>, il applique une séparation stricte entre le moteur d'exécution (runtime) et la logique de jeu. Les jeux sont développés comme des exécutables distincts liés au moteur.</p>
+      <p>Ce projet met l'accent sur la rigueur architecturale, la lisibilité et la modularité des sous-systèmes : modèle Acteur / Composant, intégration de la physique, gestion des collisions géométriques, système d'animation par spritesheet et journalisation des événements.</p>
+    `,
+
+    technicalHighlights: [
+      "Architecture hybride Acteur / Composant : acteurs responsables de la logique de haut niveau, composants modulaires (Transform, Sprite, Collider, Rigidbody)",
+      "Système de collisions 2D custom : détection AABB (Axis-Aligned Bounding Box) et collisions Cercle contre Rectangle",
+      "Moteur physique 2D avec intégration linéaire et angulaire basée sur forces et impulsions, gravité, amortissement et velocity clamping",
+      "Système d'animation 2D par spritesheets avec découpage par frames et synchronisation du framerate",
+      "Gestionnaire d'entrées (Input System) réactif et sous-système de logging (Console & TxtLog)",
+      "Compilation en bibliothèque statique propre et réutilisable pour de futurs jeux"
+    ],
+
+    gallery: [
+      { type: "gif", url: "assets/images/projects/krampus-collision.gif", caption: "Système de collisions AABB et cercles en action" },
+      { type: "gif", url: "assets/images/projects/krampus-input.gif", caption: "Input System et réactivité des contrôles" },
+      { type: "gif", url: "assets/images/projects/krampus-anim.gif", caption: "Gestion des animations par spritesheet" },
+      { type: "image", url: "assets/images/projects/krampus-console.png", caption: "Système de logging en console et fichier texte" }
+    ],
+
+    links: {
+      github: "https://github.com/Oronte/KrampusEngine"
+    }
+  },
+
+  {
+    id: "serious-game-la-poste",
+    title: "Serious Game VR - La Poste",
+    category: "unity",
+    categoryLabel: "VR & Serious Game",
+    engine: "Moteur 3D / Réalité Virtuelle",
+    languages: ["C#", "C++", "VR 6DoF"],
+    role: "Programmeur Gameplay & VR (Équipe Pluridisciplinaire)",
+    year: "2026",
+    pinned: true,
+    thumbnail: "assets/images/projects/serious-game-la-poste.svg",
+    
+    mainMedia: {
+      type: "image",
+      url: "assets/images/projects/serious-game-la-poste.svg",
+      caption: "Simulation de formation professionnelle en réalité virtuelle pour La Poste"
+    },
+
+    shortDescription: "Environnement de réalité virtuelle immersif développé pour former les employés de La Poste : conduite de transpalette, tri du matériel et prévention des risques.",
+    
+    fullDescription: `
+      <p>Développé dans le cadre d'un partenariat concret avec l'entreprise <strong>La Poste</strong>, ce projet de réalité virtuelle vise à former et sensibiliser les nouveaux employés aux enjeux de sécurité et aux tâches des centres logistiques.</p>
+      <p>Conçu au sein d'une <strong>équipe collaborative regroupant programmeurs et graphistes 3D</strong>, j'ai pris en charge le développement des mécaniques interactives et de la simulation de conduite à l'échelle 1:1.</p>
+    `,
+
+    technicalHighlights: [
+      "Conception et programmation des mécaniques de manipulation d'objets en VR (saisie, tri et empilement de colis)",
+      "Simulation physique de la conduite d'un chariot transpalette avec gestion des collisions et inertie réaliste",
+      "Mise en place de scénarios de validation des règles de sécurité et détection d'erreurs d'utilisation",
+      "Collaboration étroite en équipe agile avec les artistes 3D et retours directs des responsables de La Poste"
+    ],
+
+    gallery: [
+      { type: "image", url: "assets/images/projects/serious-game-la-poste.svg", caption: "Environnement logistique et poste de conduite simulé" }
+    ],
+
+    links: {
+      github: "https://github.com/Oronte"
+    }
+  },
+
+  {
+    id: "visual-studio-launcher",
+    title: "VisualStudioLauncher",
+    category: "tools",
+    categoryLabel: "Outil de Productivité",
+    engine: "Outil Externe",
+    languages: ["C#", "C++", "Automation"],
+    role: "Développeur de l'outil",
+    year: "2025 - 2026",
+    pinned: false,
+    thumbnail: "assets/images/projects/visual-studio-launcher.svg",
+    
+    mainMedia: {
+      type: "image",
+      url: "assets/images/projects/visual-studio-launcher.svg",
+      caption: "Automatisation du lancement et paramétrage de solutions Visual Studio"
+    },
+
+    shortDescription: "Utilitaire conçu pour accélérer et fluidifier le lancement, la configuration et le workflow de projets complexes sous Visual Studio.",
+    
+    fullDescription: `
+      <p><strong>VisualStudioLauncher</strong> est un outil développé pour optimiser le temps des développeurs lors de la manipulation quotidienne de solutions multi-projets sous Visual Studio.</p>
+      <p>Il permet de préconfigurer les environnements de compilation, d'ouvrir automatiquement les projets cibles et d'éviter les manipulations répétitives.</p>
+    `,
+
+    technicalHighlights: [
+      "Gain de temps et automatisation des workflows de développement quotidiens",
+      "Gestion des arguments de lancement et des configurations de solutions",
+      "Projet disponible en open source sur GitHub"
+    ],
+
+    gallery: [
+      { type: "image", url: "assets/images/projects/visual-studio-launcher.svg", caption: "Interface et exécution rapide" }
+    ],
+
+    links: {
+      github: "https://github.com/Oronte/VisualStudioLauncher"
+    }
+  },
+
+  {
+    id: "objectif3d-gameplay",
+    title: "Projets Moteurs & Gameplay (Objectif3D)",
+    category: "unreal",
+    categoryLabel: "Unreal Engine & Unity",
+    engine: "Unreal Engine 5 / Unity",
+    languages: ["C++", "C#", "Blueprints"],
+    role: "Étudiant Programmeur",
+    year: "2025 - 2026",
+    pinned: false,
     thumbnail: "assets/images/projects/ue5-action-rpg.svg",
     
-    // Média principal pour la modale détaillée :
-    // type : "youtube" | "video" | "image" | "gif"
-    // Pour une vidéo YouTube : mettez l'URL "embed" ex: "https://www.youtube.com/embed/dQw4w9WgXcQ"
-    // Pour un fichier local : "assets/videos/chrono_gameplay.mp4"
     mainMedia: {
-      type: "image", // Changez en "youtube" ou "video" selon votre contenu
+      type: "image",
       url: "assets/images/projects/ue5-action-rpg.svg",
-      caption: "Aperçu du système de combat et des effets volumétriques sous UE5"
+      caption: "Prototypes de gameplay et architectures modulaires étudiés à Objectif3D"
     },
 
-    shortDescription: "Action-RPG à la troisième personne avec manipulation temporelle, combat dynamique au sabre et boss fights basés sur une IA comportementale.",
+    shortDescription: "Réalisations et prototypes techniques développés durant le cursus intensif de programmation à l'école Objectif3D (C++ sous UE5 et C# sous Unity).",
     
     fullDescription: `
-      <p><strong>Chrono Protocol</strong> est un prototype d'Action-RPG nerveux développé sous Unreal Engine 5 en C++ natif avec l'intégration du <em>Gameplay Ability System (GAS)</em>.</p>
-      <p>Le joueur dispose de capacités temporelles (ralentissement localisé, rembobinage de trajectoires de projectiles et dash dimensionnel). L'objectif technique principal était de maintenir 60 FPS constants tout en gérant un système de combos réactif et des particules Niagara intenses.</p>
-      <p>Ce projet illustre une architecture solide séparant nettement la logique bas niveau en C++ et l'exposition d'événements modulaires aux designers via des Blueprints légers.</p>
-    `,
-
-    // Points techniques clés mis en avant dans la fiche
-    technicalHighlights: [
-      "Système de compétences robuste utilisant Unreal GAS (Gameplay Ability System) avec Attributs & Effects",
-      "Character Controller custom avec animations synchronisées via Motion Matching et root motion",
-      "IA d'ennemis complexe programmée avec Behavior Trees, EQS (Environment Query System) et Perception Component",
-      "Système de ralentissement temporel affectant sélectivement les acteurs et les émetteurs Niagara",
-      "Optimisation de la mémoire et gestion du chargement asynchrone des assets via Soft Object Pointers"
-    ],
-
-    // Galerie supplémentaire pour la vue détaillée (Images, GIFs, etc.)
-    gallery: [
-      { type: "image", url: "assets/images/projects/ue5-action-rpg.svg", caption: "Arène de combat et éclairage Lumen" },
-      { type: "image", url: "assets/images/projects/native-engine.svg", caption: "Diagramme d'architecture des capacités C++" }
-    ],
-
-    // Liens vers les plateformes externes
-    links: {
-      github: "https://github.com/votre-nom/chrono-protocol",
-      itch: "https://votre-nom.itch.io/chrono-protocol",
-      steam: "",
-      video: "https://youtube.com/watch?v=exemple",
-      demo: ""
-    }
-  },
-
-  {
-    id: "dungeon-recursion",
-    title: "Dungeon Recursion",
-    category: "unity",
-    categoryLabel: "Unity & C#",
-    engine: "Unity 6 (URP)",
-    languages: ["C#", "HLSL"],
-    role: "Gameplay & Systems Programmer",
-    year: "2023 - 2024",
-    pinned: true,
-    thumbnail: "assets/images/projects/unity-roguelike.svg",
-    
-    mainMedia: {
-      type: "image",
-      url: "assets/images/projects/unity-roguelike.svg",
-      caption: "Génération procédurale de donjons et rendu en vue isométrique stylisée"
-    },
-
-    shortDescription: "Roguelike tactique avec génération procédurale infinie de donjons, architecture ECS/DOTS pour 500+ entités simultanées et pathfinding custom.",
-    
-    fullDescription: `
-      <p><strong>Dungeon Recursion</strong> est un jeu d'exploration tactique en temps réel développé sous Unity. Chaque étage du donjon est généré selon un algorithme procédural combinant des automates cellulaires et la triangulation de Delaunay.</p>
-      <p>Pour faire face aux goulets d'étranglement de performance causés par des centaines d'ennemis à l'écran, le système de déplacement et de détection a été réécrit avec Unity DOTS (Entities, C# Job System et le Burst Compiler).</p>
+      <p>Au cours de ma formation à <strong>Objectif3D</strong>, j'approfondis les méthodologies de développement de jeux modernes : programmation de mécaniques en C++, architectures orientées composants, gestion des caméras, inputs et optimisation des ressources.</p>
+      <p>Ces projets d'études permettent de consolider la pratique conjointe d'<strong>Unreal Engine</strong> (C++ / Blueprints) et d'<strong>Unity</strong> (C#).</p>
     `,
 
     technicalHighlights: [
-      "Génération procédurale de salles et couloirs via Delaunay Triangulation + Spanning Tree (MST)",
-      "Implémentation du C# Job System & Burst Compiler pour calculer le pathfinding de 500 monstres en &lt; 1.2ms",
-      "Système d'inventaire découplé utilisant des ScriptableObjects et architecture événementielle",
-      "Shaders personnalisés écrits en HLSL pour les effets de brouillard de guerre et de dissolution",
-      "Sauvegarde binaire chiffrée avec sérialisation rapide sans allocation mémoire"
+      "Création de Character Controllers réactifs et systèmes de déplacement",
+      "Pratique rigoureuse des standards de code C++ et architectures logicielles de jeux vidéo",
+      "Gestion des cycles de vie d'objets, mathématiques 3D (vecteurs, matrices, quaternions)",
+      "Projets réalisés sous contraintes de temps et présentations techniques"
     ],
 
     gallery: [
-      { type: "image", url: "assets/images/projects/unity-roguelike.svg", caption: "Génération procédurale des salles" }
+      { type: "image", url: "assets/images/projects/ue5-action-rpg.svg", caption: "Mise en situation de gameplay 3D" }
     ],
 
     links: {
-      github: "https://github.com/votre-nom/dungeon-recursion",
-      itch: "https://votre-nom.itch.io/dungeon-recursion",
-      video: ""
-    }
-  },
-
-  {
-    id: "aether-engine",
-    title: "Aether 3D Engine",
-    category: "native",
-    categoryLabel: "C++ Natif & Moteur 3D",
-    engine: "Moteur Maison (From Scratch)",
-    languages: ["C++20", "OpenGL 4.5 / Vulkan", "GLSL"],
-    role: "Engine Programmer",
-    year: "2023",
-    pinned: true,
-    thumbnail: "assets/images/projects/native-engine.svg",
-    
-    mainMedia: {
-      type: "image",
-      url: "assets/images/projects/native-engine.svg",
-      caption: "Pipeline de rendu PBR avec ombrage en cascade et profiler de mémoire"
-    },
-
-    shortDescription: "Moteur de jeu 3D développé en C++20 sans framework lourd. Rendu PBR (Physically Based Rendering), Job System multithreadé et système ECS.",
-    
-    fullDescription: `
-      <p><strong>Aether Engine</strong> est un moteur de jeu 3D conçu à partir de zéro afin d'explorer en profondeur les fondations des moteurs modernes.</p>
-      <p>Le moteur comprend son propre gestionnaire de mémoire à allocateurs personnalisés (Linear, Stack, Pool Allocators), un système d'entités-composants (ECS) orienté cache CPU (Data-Oriented Design) et un pipeline de rendu PBR complet.</p>
-    `,
-
-    technicalHighlights: [
-      "Pipeline de rendu moderne : PBR métallique/rugosité, ombres dynamiques Shadow Mapping directionnel",
-      "Multithreading : Job System basé sur une file lock-free et fibers pour répartir les calculs sur les cœurs CPU",
-      "Gestion mémoire manuelle sans fuites : allocateurs par arène (Arena Allocator) et zéro allocations en runtime par frame",
-      "Mathématiques 3D custom : bibliothèque Vector3/4, Matrix4x4 et Quaternion optimisée SIMD",
-      "Intégration d'outils de debugging temps réel : Dear ImGui pour l'interface éditeur et Tracy Profiler"
-    ],
-
-    gallery: [
-      { type: "image", url: "assets/images/projects/native-engine.svg", caption: "Éditeur ImGui et statistiques de draw calls" }
-    ],
-
-    links: {
-      github: "https://github.com/votre-nom/aether-3d-engine",
-      demo: "",
-      video: ""
-    }
-  },
-
-  {
-    id: "pypipeline-tools",
-    title: "PyCook & Asset Pipeline",
-    category: "tools",
-    categoryLabel: "Outils & Pipeline Python",
-    engine: "Outil Externe / CLI & GUI",
-    languages: ["Python 3.11", "PyQt6", "C++"],
-    role: "Tools & Pipeline Developer",
-    year: "2024",
-    pinned: false,
-    thumbnail: "assets/images/projects/python-tool.svg",
-    
-    mainMedia: {
-      type: "image",
-      url: "assets/images/projects/python-tool.svg",
-      caption: "Interface PyQt6 pour l'automatisation de batch baking et validation d'assets"
-    },
-
-    shortDescription: "Suite d'outils d'automatisation en Python pour l'ingestion d'assets 3D, génération automatique de LODs, vérification de collision et export UE5 / Unity.",
-    
-    fullDescription: `
-      <p>Conçu pour réduire les frictions des équipes créatives, <strong>PyCook</strong> est un outil d'automatisation de pipeline d'assets.</p>
-      <p>Il surveille les répertoires sources, convertit et optimise automatiquement les maillages FBX/glTF, génère les niveaux de détails (LODs) via l'API sans interface de Blender et exporte les métadonnées prêtes à l'emploi pour Unreal Engine 5 et Unity.</p>
-    `,
-
-    technicalHighlights: [
-      "Interface graphique moderne et réactive construite avec PyQt6 et thèmes sombres custom",
-      "Traitement asynchrone multithreadé (QThreadPool) pour traiter des centaines d'assets en arrière-plan",
-      "Intégration de l'API headless de Blender pour la décimation de polygones et le calcul de normales",
-      "Scripts d'importation automatique en Python pour l'Unreal Editor (Unreal Python API)",
-      "Vérification automatique des standards : collisions concaves/convexes, noms de textures et taille puissance de deux"
-    ],
-
-    gallery: [
-      { type: "image", url: "assets/images/projects/python-tool.svg", caption: "Visualisation du graphe de dépendances d'assets" }
-    ],
-
-    links: {
-      github: "https://github.com/votre-nom/pycook-asset-pipeline"
+      github: "https://github.com/Oronte"
     }
   }
 ];

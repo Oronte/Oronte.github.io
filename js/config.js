@@ -1,91 +1,92 @@
 /**
  * ====================================================================
- * CONFIGURATION DU PORTFOLIO - GAME DEVELOPER
+ * CONFIGURATION DU PORTFOLIO - ORONTE SOLER
  * ====================================================================
- * Modifiez les valeurs ci-dessous avec vos propres informations !
- * Ce fichier est conçu pour être facilement modifiable sans toucher au HTML.
+ * Informations extraites du CV et du profil GitHub : https://github.com/Oronte
  */
 
 window.PORTFOLIO_CONFIG = {
   // Informations Personnelles
   profile: {
-    name: "Alex Dev", // Remplacez par votre Nom et Prénom
-    role: "Game Developer & Engine Programmer",
-    tagline: "Passionné par l'architecture moteur, le gameplay fluide et les performances bas niveau.",
-    location: "Paris, France & Remote",
-    statusText: "Disponible pour opportunités (CDI / Freelance)",
-    statusAvailable: true, // Affiche le point vert "disponible"
-    avatar: "assets/images/placeholder-avatar.svg", // Chemin vers votre photo ou avatar
-    resumeUrl: "assets/resume.pdf", // Mettez votre CV PDF dans le dossier assets/
-    email: "contact.gamedev@example.com"
+    name: "Oronte Soler",
+    role: "Étudiant en Programmation Informatique & Game Development",
+    tagline: "En 2ème année à Objectif3D (Montpellier), passionné par le C++, C#, Unreal Engine, Unity et le développement de moteurs 2D/3D. À la recherche d'une alternance.",
+    location: "Castelnau-le-Lez / Montpellier (34)",
+    statusText: "Recherche active d'une alternance (2025 - 2026)",
+    statusAvailable: true,
+    avatar: "assets/images/oronte.png",
+    resumeUrl: "assets/resume.pdf",
+    email: "orontesoler06@gmail.com",
+    phone: "07 83 87 01 25"
   },
 
   // Liens Réseaux Sociaux & Plateformes
   socials: {
-    github: "https://github.com/votre-nom",
-    linkedin: "https://linkedin.com/in/votre-nom",
-    itchio: "https://votre-nom.itch.io",
-    youtube: "https://youtube.com/@votre-chaine",
-    artstation: "", // Laissez vide "" si vous n'en avez pas
-    twitter: "https://x.com/votre-compte",
+    github: "https://github.com/Oronte",
+    linkedin: "", // Ajoutez votre URL LinkedIn ici dès que vous en avez une
+    itchio: "",
+    youtube: "",
+    artstation: "",
+    twitter: "",
     steam: ""
   },
 
   // À propos de vous
   about: {
-    title: "Créateur d'univers interactifs et de moteurs sur-mesure",
+    title: "Étudiant à Objectif3D & Créateur de KrampusEngine",
     paragraphs: [
-      "Développeur de jeux vidéo polyvalent avec une forte sensibilité pour la technique, je conçois des systèmes de jeu réactifs et optimisés. Mon expertise s'étend de la programmation gameplay haut niveau sur Unreal Engine et Unity jusqu'à l'implémentation de pipelines de rendu natifs en C++.",
-      "J'aime résoudre les défis complexes : simulation physique, intelligence artificielle d'ennemis, systèmes d'animation, architectures multithreadées et outils en Python pour accélérer la production d'équipe.",
-      "Que ce soit pour un prototype rapide de Game Jam ou un projet ambitieux sur plusieurs années, je privilégie toujours un code propre, modulaire et documenté."
+      "Actuellement en <strong>deuxième année de programmation à l'école Objectif3D</strong> à Montpellier, je développe des compétences solides en <strong>C++</strong> et <strong>C#</strong>, ainsi qu'en utilisation de moteurs de référence de l'industrie tels qu'<strong>Unreal Engine</strong> et <strong>Unity</strong>.",
+      "Passionné par l'architecture logicielle et le fonctionnement interne des moteurs, j'ai notamment conçu en totale autonomie <strong>KrampusEngine</strong>, un moteur de jeu 2D moderne en C++20 avec SFML 3.0 intégrant un modèle Acteur/Composant, un moteur physique et un système de collisions.",
+      "J'ai également eu l'opportunité de développer un <strong>Serious Game en Réalité Virtuelle pour l'entreprise La Poste</strong>, au sein d'une équipe pluridisciplinaire (programmeurs et graphistes 3D), destiné à la formation des employés (conduite de transpalette, tri du matériel et prévention des risques).",
+      "Je souhaite aujourd'hui mettre mon autonomie, ma rigueur et ma passion de la programmation au service d'une entreprise pour participer à des projets concrets et approfondir ma pratique dans le cadre d'une <strong>alternance</strong>."
     ],
     stats: [
-      { number: "5+", label: "Années de programmation" },
-      { number: "12+", label: "Projets & Game Jams" },
-      { number: "4", label: "Langages maîtrisés (C++, C#, Py, Shaders)" },
-      { number: "100%", label: "Passion pour l'optimisation" }
+      { number: "2ème", label: "Année à Objectif3D" },
+      { number: "C++ / C#", label: "Langages de prédilection" },
+      { number: "UE5 & Unity", label: "Moteurs 3D pratiqués" },
+      { number: "100%", label: "Motivation pour l'alternance" }
     ]
   },
 
-  // Compétences techniques classées par catégories
+  // Compétences techniques
   skillsCategories: [
     {
       name: "Langages de programmation",
       icon: "fa-code",
       skills: [
-        { name: "C++ (C++17/20)", level: "Avancé", details: "Mémoire manuelle, RAII, Smart Pointers, Multithreading, Templates, STL" },
-        { name: "C# (.NET)", level: "Avancé", details: "Architecture modulaire, LINQ, Async/Await, Optimisation Garbage Collector" },
-        { name: "Python", level: "Intermédiaire", details: "Scripts d'automatisation, Pipelines DCC (Blender), Scripts de build, Outils CLI" },
-        { name: "Shaders (HLSL / GLSL)", level: "Intermédiaire", details: "Vertex & Pixel Shaders, PBR, Compute Shaders, Shader Graph" }
+        { name: "C++ (C++20)", level: "Avancé", details: "Programmation orientée objet, gestion de la mémoire, pointeurs, structures de données, SFML 3.0" },
+        { name: "C# (.NET)", level: "Avancé", details: "Architecture modulaire, C# pour Unity, ScriptableObjects, structures de contrôle" },
+        { name: "Python", level: "Intermédiaire", details: "Bases d'algorithmique, scripts d'automatisation et traitement de données (Spécialité NSI)" }
       ]
     },
     {
-      name: "Moteurs de Jeu",
+      name: "Moteurs & Frameworks",
       icon: "fa-gamepad",
       skills: [
-        { name: "Unreal Engine 5", level: "Avancé", details: "C++ & Blueprints, Gameplay Ability System (GAS), Niagara VFX, Enhanced Input, UMG" },
-        { name: "Unity", level: "Avancé", details: "Architecture C#, Scriptable Objects, DOTS / ECS & Job System, UI Toolkit, Profiler" },
-        { name: "Natif / Custom Engine", level: "Intermédiaire", details: "Création de mini-moteur from scratch : OpenGL 4.5, Vulkan (notions), DirectX 11/12, SDL2" }
+        { name: "Unreal Engine", level: "En formation", details: "C++ & Blueprints, Game Framework, apprentissage approfondi à Objectif3D" },
+        { name: "Unity", level: "En formation", details: "Développement en C#, physique 2D/3D, gestion de scènes et composants" },
+        { name: "C++ Natif & SFML 3.0", level: "Avancé", details: "Création autonome de KrampusEngine : boucle de jeu, rendu 2D, bibliothèque statique" },
+        { name: "Réalité Virtuelle (VR)", level: "Pratiqué", details: "Développement du Serious Game La Poste, immersion et interactions physiques 6DoF" }
       ]
     },
     {
-      name: "Domaines & Spécialités",
+      name: "Architecture & Spécialités",
       icon: "fa-microchip",
       skills: [
-        { name: "Gameplay Programming", level: "Avancé", details: "Character Controllers, Caméras, State Machines (FSM), Systèmes de combat" },
-        { name: "Mathématiques 3D & Physique", level: "Avancé", details: "Vecteurs, Matrices, Quaternions, Raycasting, Collisions spatiales (Octree/BVH)" },
-        { name: "Intelligence Artificielle (IA)", level: "Intermédiaire", details: "Behavior Trees, Navigation Mesh, A* Pathfinding, Systèmes de perception" },
-        { name: "Networking / Multijoueur", level: "Notions", details: "Client-Server, Réplication d'acteurs, Lag Compensation, Epic Online Services" }
+        { name: "Architecture Moteur", level: "Pratiqué", details: "Modèle Actor / Component, séparation stricte entre moteur runtime et logique de jeu" },
+        { name: "Physique 2D & Collisions", level: "Pratiqué", details: "Boîtes AABB, Cercle-Rectangle, impulsions, gravité, amortissement et velocity clamping" },
+        { name: "Animation & Entrées", level: "Pratiqué", details: "Gestion des spritesheets par frames, Input System clavier/souris réactif" },
+        { name: "Mathématiques & Algorithmique", level: "Avancé", details: "Spécialités NSI et Mathématiques au Baccalauréat (Mention Assez Bien)" }
       ]
     },
     {
       name: "Outils & Workflow",
       icon: "fa-screwdriver-wrench",
       skills: [
-        { name: "Visual Studio & Rider", level: "Quotidien", details: "Debugging avancé, Memory Dumps, Profiling de performance" },
-        { name: "RenderDoc & Profilers", level: "Régulier", details: "Analyse GPU, Draw calls, Tracy Profiler, Unreal Insights" },
-        { name: "Versionning (Git / Perforce)", level: "Quotidien", details: "Git LFS, Branches, Perforce Helix Core, CI/CD basique" },
-        { name: "CMake & Build Tools", level: "Régulier", details: "Configuration cross-platform, vcpkg, compilation native" }
+        { name: "Visual Studio & VS Code", level: "Quotidien", details: "Environnement principal de développement C++/C#, compilation et débogage" },
+        { name: "Git & GitHub", level: "Quotidien", details: "Contrôle de version, gestion des dépôts, branches, GitHub Pages" },
+        { name: "Outils Internes", level: "Régulier", details: "Création d'utilitaires dédiés tels que VisualStudioLauncher" },
+        { name: "Travail d'équipe & Communication", level: "Solide", details: "Collaboration pluridisciplinaire avec graphistes 3D, relation avec La Poste, BAFA" }
       ]
     }
   ],
@@ -93,22 +94,46 @@ window.PORTFOLIO_CONFIG = {
   // Parcours / Expérience & Formation
   timeline: [
     {
-      period: "2023 - Présent",
-      title: "Gameplay & Engine Programmer",
-      company: "Studio Indépendant / Projets Personnels",
-      description: "Conception de prototypes en C++ sous Unreal Engine 5 et développement d'un moteur 3D natif avec OpenGL. Création d'outils d'automatisation Python."
+      period: "2025 - 2026",
+      title: "2ème Année de Programmation Informatique",
+      company: "Objectif3D - École des arts numériques (Montpellier)",
+      description: "Formation intensive dédiée à la programmation de jeux vidéo : C++, C#, Unreal Engine, Unity, mathématiques appliquées et architectures logicielles."
     },
     {
-      period: "2022 - 2023",
-      title: "Unity Developer (C#)",
-      company: "Game Studio",
-      description: "Développement des mécaniques de combat, intégration de shaders personnalisés et optimisation du frametime mobile et PC."
+      period: "2026",
+      title: "Développeur Serious Game VR - Entreprise La Poste",
+      company: "Projet Professionnel en Équipe",
+      description: "Développement d'un environnement de réalité virtuelle pour la formation des employés de La Poste (conduite de transpalette, tri du matériel, sensibilisation aux risques). Travail conjoint entre programmeurs et graphistes 3D."
     },
     {
-      period: "2020 - 2022",
-      title: "Diplôme / Master en Informatique & Game Development",
-      company: "École Supérieure d'Informatique / Jeux Vidéo",
-      description: "Spécialisation en programmation 3D, mathématiques appliquées aux moteurs physiques et architectures logicielles C++."
+      period: "2026",
+      title: "Conception de KrampusEngine (Moteur 2D C++20)",
+      company: "Projet Personnel & Open Source",
+      description: "Création autonome d'un moteur de jeu 2D en C++20 sous forme de bibliothèque statique avec SFML 3.0 : architecture Acteur/Composant, moteur physique, collisions AABB et animations."
+    },
+    {
+      period: "2024",
+      title: "Baccalauréat Général - Mention Assez Bien",
+      company: "Spécialités NSI (Numérique et Sciences Informatiques) & Mathématiques",
+      description: "Acquisition de bases solides en algorithmique, programmation Python et mathématiques."
+    },
+    {
+      period: "2024",
+      title: "Obtention du BAFA (Spécialité 6 - 12 ans)",
+      company: "Animation & Pédagogie",
+      description: "Développement de compétences relationnelles, sens des responsabilités, gestion de groupe et esprit d'équipe."
+    },
+    {
+      period: "08/2023",
+      title: "Stage d'observation en entreprise",
+      company: "SMILE (Leader européen des solutions open source)",
+      description: "Découverte du monde de l'ingénierie logicielle, des méthodologies agiles et de l'intégration de solutions ouvertes."
+    },
+    {
+      period: "12/2022 & 08/2021",
+      title: "Stages en Recherche & Bio-informatique",
+      company: "Institut des Neurosciences de Montpellier (INM) & Institut de Génétique Moléculaire (IGMM)",
+      description: "Immersion auprès d'équipes de chercheurs et de bio-informaticiens manipulant du code et des données scientifiques."
     }
   ]
 };

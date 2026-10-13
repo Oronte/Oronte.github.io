@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="vsBg" x1="0%" y1="0%" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e111a"/>
+      <stop offset="100%" stop-color="#211538"/>
+    </linearGradient>
+    <linearGradient id="purpleGlow" x1="0%" y1="0%" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#vsBg)"/>
+
+  <!-- Visual Studio Infinity Logo Stylized -->
+  <g transform="translate(400, 190) scale(1.6)">
+    <!-- VS ribbon / infinity shape -->
+    <path d="M-60 0 C-60 -25 -30 -30 0 0 C30 30 60 25 60 0 C60 -25 30 -30 0 0 C-30 30 -60 25 -60 0 Z" fill="none" stroke="url(#purpleGlow)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="50,-35 70,0 50,35 25,18 45,0 25,-18" fill="#a855f7" opacity="0.8"/>
+  </g>
+
+  <!-- Dev Tool Interface Mockup -->
+  <rect x="220" y="270" width="360" height="50" rx="8" fill="#131828" stroke="#6366f1" stroke-width="1.5"/>
+  <circle cx="245" cy="295" r="5" fill="#10b981"/>
+  <text x="265" y="300" fill="#f8fafc" font-family="monospace" font-size="13">VisualStudioLauncher.exe --quick-launch</text>
+
+  <!-- Badges -->
+  <rect x="30" y="30" width="160" height="34" rx="8" fill="#000" opacity="0.75" stroke="#a855f7" stroke-width="1.2"/>
+  <text x="110" y="52" fill="#c084fc" font-family="system-ui, sans-serif" font-weight="700" font-size="12" text-anchor="middle">C++ / C# TOOLING</text>
+
+  <!-- Title -->
+  <text x="400" y="365" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="800" font-size="28" letter-spacing="2" text-anchor="middle">VISUAL STUDIO LAUNCHER</text>
+  <text x="400" y="392" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="14" text-anchor="middle">Productivité &bull; Automatisation de Configuration de Solutions VS</text>
+</svg>
