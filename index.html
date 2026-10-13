@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Developer Portfolio | C++, Unreal, Unity & Natif</title>
+  
+  <!-- Meta SEO & OpenGraph pour les réseaux sociaux -->
+  <meta name="description" content="Portfolio de développeur de jeux vidéo spécialisé en C++, C#, Python, Unreal Engine, Unity et programmation bas niveau / natif.">
+  <meta property="og:title" content="Game Developer Portfolio">
+  <meta property="og:description" content="Développeur Gameplay & Moteur de Jeu | C++, Unreal Engine 5, Unity, Moteurs Natifs">
+  <meta property="og:image" content="assets/images/projects/ue5-action-rpg.svg">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Polices Google Fonts (Inter & JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome pour les icônes de jeux et de réseaux -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Feuille de styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ======================================================================
+       BARRE DE NAVIGATION
+       ====================================================================== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#hero" class="nav-brand">
+        <span class="brand-icon"><i class="fa-solid fa-gamepad"></i></span>
+        <div>
+          <span id="brand-name">Game Dev</span>
+          <div class="brand-role">&lt;PORTFOLIO /&gt;</div>
+        </div>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#hero" class="nav-link active">Accueil</a></li>
+        <li><a href="#projets" class="nav-link">Projets</a></li>
+        <li><a href="#competences" class="nav-link">Compétences</a></li>
+        <li><a href="#a-propos" class="nav-link">À propos</a></li>
+        <li><a href="#parcours" class="nav-link">Parcours</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="assets/resume.pdf" class="btn btn-sm btn-secondary btn-resume" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-file-arrow-down"></i> Mon CV
+        </a>
+        <button class="nav-toggle" aria-label="Menu Mobile">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======================================================================
+       HERO SECTION (ACCUEIL)
+       ====================================================================== -->
+  <header class="hero" id="hero">
+    <canvas id="hero-canvas"></canvas>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span id="hero-status-text">Disponible pour opportunités</span>
+        </div>
+
+        <h1 class="hero-title">
+          Bonjour, je suis <br>
+          <span class="gradient-text" id="hero-name">Game Developer</span>
+        </h1>
+
+        <div class="hero-role" id="hero-role">
+          Gameplay &amp; Engine Programmer
+        </div>
+
+        <p class="hero-tagline" id="hero-tagline">
+          Spécialisé en C++, Unreal Engine, Unity et programmation bas niveau / natif.
+        </p>
+
+        <!-- Piliers techniques rapides -->
+        <div class="hero-tech-pills">
+          <span class="hero-tech-pill"><i class="fa-solid fa-code"></i> C++ &amp; C#</span>
+          <span class="hero-tech-pill"><i class="fa-solid fa-vr-cardboard"></i> Unreal Engine 5</span>
+          <span class="hero-tech-pill"><i class="fa-brands fa-unity"></i> Unity</span>
+          <span class="hero-tech-pill"><i class="fa-solid fa-microchip"></i> Natif (GL/Vulkan)</span>
+          <span class="hero-tech-pill"><i class="fa-brands fa-python"></i> Python Tools</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#projets" class="btn btn-primary">
+            <i class="fa-solid fa-gamepad"></i> Découvrir mes projets
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <i class="fa-solid fa-paper-plane"></i> Me contacter
+          </a>
+          <a href="assets/resume.pdf" class="btn btn-cyan btn-resume" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i> Télécharger CV
+          </a>
+        </div>
+
+        <!-- Réseaux Sociaux -->
+        <div class="hero-socials" id="hero-socials">
+          <!-- Injecté dynamiquement depuis config.js -->
+        </div>
+      </div>
+
+      <!-- Avatar & Carte de Présentation -->
+      <div class="hero-visual">
+        <div class="avatar-card">
+          <div class="avatar-wrapper">
+            <div class="avatar-glow-ring"></div>
+            <img src="assets/images/placeholder-avatar.svg" alt="Avatar" class="avatar-img" id="avatar-img">
+          </div>
+          <h3 id="avatar-name">Game Developer</h3>
+          <div class="avatar-spec" id="avatar-role">Gameplay &amp; Engine Programmer</div>
+          
+          <div class="avatar-stats">
+            <div class="avatar-stat-item">
+              <span class="avatar-stat-number">C++ / C#</span>
+              <span class="avatar-stat-label">Core Languages</span>
+            </div>
+            <div class="avatar-stat-item">
+              <span class="avatar-stat-number">UE5 / Unity</span>
+              <span class="avatar-stat-label">Engines</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       SECTION PROJETS (AVEC FILTRES & RECHERCHE)
+       ====================================================================== -->
+  <section class="section" id="projets">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">&lt;SHOWCASE /&gt;</span>
+        <h2 class="section-title">Mes Projets &amp; Créations</h2>
+        <p class="section-subtitle">
+          Explorez mes réalisations : jeux sous Unreal et Unity, prototypes de moteurs 3D en C++ et outils pipelines en Python.
+        </p>
+      </div>
+
+      <!-- Contrôles : Filtres par catégories + Barre de Recherche -->
+      <div class="projects-controls">
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">Tous les projets</button>
+          <button class="filter-btn" data-filter="unreal">Unreal Engine</button>
+          <button class="filter-btn" data-filter="unity">Unity</button>
+          <button class="filter-btn" data-filter="native">C++ Natif &amp; Moteur</button>
+          <button class="filter-btn" data-filter="tools">Outils &amp; Python</button>
+        </div>
+
+        <div class="projects-search-bar">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="project-search" class="search-input" placeholder="Rechercher par titre, mécanique, langage (ex: C++, GAS, Shaders)...">
+        </div>
+      </div>
+
+      <!-- Grille des Projets -->
+      <div class="projects-grid" id="projects-grid">
+        <!-- Rendu dynamique depuis projects.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION COMPÉTENCES TECHNIQUES (SKILLS)
+       ====================================================================== -->
+  <section class="section" id="competences" style="background: rgba(16, 20, 34, 0.4);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">&lt;STACK TECHNIQUE /&gt;</span>
+        <h2 class="section-title">Compétences &amp; Technologies</h2>
+        <p class="section-subtitle">
+          De l'architecture moteur de bas niveau jusqu'à la conception de mécaniques de gameplay interactives.
+        </p>
+      </div>
+
+      <div class="skills-grid" id="skills-grid">
+        <!-- Rendu dynamique depuis config.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION À PROPOS & STATISTIQUES
+       ====================================================================== -->
+  <section class="section" id="a-propos">
+    <div class="container">
+      <div class="about-wrapper">
+        <div class="about-text">
+          <span class="section-tag">&lt;QUI SUIS-JE /&gt;</span>
+          <h2 class="section-title" id="about-title">Développeur de jeux passionné par la technique</h2>
+          
+          <div id="about-paragraphs">
+            <!-- Rendu dynamique depuis config.js -->
+          </div>
+
+          <div style="margin-top: 1rem;">
+            <a href="#contact" class="btn btn-primary">
+              <i class="fa-solid fa-envelope"></i> Discutons d'un projet
+            </a>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="about-stats">
+          <!-- Rendu dynamique depuis config.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION PARCOURS (TIMELINE)
+       ====================================================================== -->
+  <section class="section" id="parcours" style="background: rgba(16, 20, 34, 0.4);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">&lt;HISTORIQUE /&gt;</span>
+        <h2 class="section-title">Expérience &amp; Formation</h2>
+        <p class="section-subtitle">
+          Mon évolution professionnelle et mes projets majeurs dans l'industrie du jeu vidéo.
+        </p>
+      </div>
+
+      <div class="timeline" id="timeline-list">
+        <!-- Rendu dynamique depuis config.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SECTION CONTACT
+       ====================================================================== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">&lt;COMMUNICATION /&gt;</span>
+        <h2 class="section-title">Prendre Contact</h2>
+        <p class="section-subtitle">
+          Vous cherchez un programmeur gameplay, un développeur moteur ou vous souhaitez échanger sur un projet ?
+        </p>
+      </div>
+
+      <div class="contact-wrapper">
+        <!-- Méthodes de contact directes -->
+        <div class="contact-card">
+          <h3>Coordonnées &amp; Réseaux</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem;">
+            N'hésitez pas à me contacter par email ou via LinkedIn. Je réponds généralement sous 24h.
+          </p>
+
+          <div class="contact-links-list">
+            <!-- Email -->
+            <div class="contact-method-item">
+              <div class="contact-method-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="contact-method-info">
+                <span class="contact-method-label">Email Direct</span>
+                <span class="contact-method-value" id="contact-email-text">contact@example.com</span>
+              </div>
+              <button class="btn btn-sm btn-secondary" id="btn-copy-email" title="Copier l'adresse">
+                <i class="fa-regular fa-copy"></i> Copier
+              </button>
+            </div>
+
+            <!-- GitHub -->
+            <a href="#" class="contact-method-item" id="contact-github-link" target="_blank" rel="noopener noreferrer">
+              <div class="contact-method-icon"><i class="fa-brands fa-github"></i></div>
+              <div class="contact-method-info">
+                <span class="contact-method-label">GitHub</span>
+                <span class="contact-method-value">Voir mes dépôts &amp; code</span>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--text-muted);"></i>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="#" class="contact-method-item" id="contact-linkedin-link" target="_blank" rel="noopener noreferrer">
+              <div class="contact-method-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+              <div class="contact-method-info">
+                <span class="contact-method-label">LinkedIn</span>
+                <span class="contact-method-value">Profil professionnel</span>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--text-muted);"></i>
+            </a>
+
+            <!-- Itch.io -->
+            <a href="#" class="contact-method-item" id="contact-itchio-link" target="_blank" rel="noopener noreferrer">
+              <div class="contact-method-icon"><i class="fa-brands fa-itch-io"></i></div>
+              <div class="contact-method-info">
+                <span class="contact-method-label">Itch.io</span>
+                <span class="contact-method-value">Jouer à mes créations</span>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--text-muted);"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Formulaire de contact direct -->
+        <div class="contact-card">
+          <h3>Envoyer un Message</h3>
+          <form id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label for="form-name" class="form-label">Votre Nom / Studio</label>
+              <input type="text" id="form-name" class="form-control" placeholder="Ex: Studio / Recruteur" required>
+            </div>
+
+            <div class="form-group">
+              <label for="form-email" class="form-label">Votre Email</label>
+              <input type="email" id="form-email" class="form-control" placeholder="nom@exemple.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="form-subject" class="form-label">Sujet</label>
+              <input type="text" id="form-subject" class="form-control" placeholder="Proposition de poste / Collaboration" required>
+            </div>
+
+            <div class="form-group">
+              <label for="form-message" class="form-label">Message</label>
+              <textarea id="form-message" class="form-control" placeholder="Décrivez votre projet ou votre proposition..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <i class="fa-solid fa-paper-plane"></i> Envoyer le message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-socials" id="footer-socials"></div>
+      <p>&copy; <span id="copyright-year">2026</span> Game Developer Portfolio. Conçu pour GitHub Pages.</p>
+      <p style="font-size: 0.8rem; color: var(--text-muted);">
+        Propulsé par HTML5, CSS3 &amp; Vanilla JavaScript &bull; Zéro dépendance de compilation
+      </p>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       MODALE DÉTAILLÉE DE PROJET (LIGHTBOX DYNAMIQUE)
+       ====================================================================== -->
+  <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Fermer la modale">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Média en grand (Vidéo, YouTube, GIF ou Image) -->
+      <div class="modal-media-wrapper" id="modal-media-content">
+        <!-- Injecté dynamiquement -->
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-title-row">
+          <div>
+            <h2 id="modal-title" style="font-size: 1.75rem; font-weight: 800;">Titre du projet</h2>
+            <div id="modal-meta" style="color: var(--cyan); font-family: var(--font-mono); font-size: 0.9rem; margin-top: 0.25rem;">
+              Rôle • Moteur • Année
+            </div>
+          </div>
+          <span id="modal-category" class="tag tag-unreal">Catégorie</span>
+        </div>
+
+        <!-- Description complète -->
+        <div id="modal-desc" style="color: var(--text-secondary); line-height: 1.6;">
+          Description...
+        </div>
+
+        <!-- Spécifications techniques -->
+        <div class="modal-highlights" id="modal-highlights-section">
+          <h4><i class="fa-solid fa-microchip"></i> Points Clés &amp; Défis Techniques</h4>
+          <ul id="modal-highlights-list">
+            <!-- Injecté dynamiquement -->
+          </ul>
+        </div>
+
+        <!-- Galerie additionnelle -->
+        <div id="modal-gallery-section">
+          <h4 style="font-size: 1rem; color: var(--text-main); margin-bottom: 0.5rem;">
+            <i class="fa-solid fa-images"></i> Galerie &amp; Captures (cliquez pour afficher en grand)
+          </h4>
+          <div class="modal-gallery-grid" id="modal-gallery-container">
+            <!-- Injecté dynamiquement -->
+          </div>
+        </div>
+
+        <!-- Liens d'action (GitHub, Jouer, Vidéo) -->
+        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border-color);" id="modal-links-container">
+          <!-- Injecté dynamiquement -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast-msg"></div>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Année courante dans le footer
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

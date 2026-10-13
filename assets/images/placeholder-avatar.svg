@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="50%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#0c0e17" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="200" height="200" rx="100" fill="#121624"/>
+  <circle cx="100" cy="100" r="95" fill="url(#glow)"/>
+  <circle cx="100" cy="100" r="95" fill="none" stroke="url(#avatarGrad)" stroke-width="3" stroke-dasharray="6 4"/>
+  
+  <!-- Silhouette / Headset Dev avatar -->
+  <circle cx="100" cy="85" r="34" fill="#1e2438" stroke="url(#avatarGrad)" stroke-width="2"/>
+  <!-- Headset band -->
+  <path d="M60 85 C60 55 140 55 140 85" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <rect x="58" y="76" width="10" height="20" rx="4" fill="#06b6d4"/>
+  <rect x="132" y="76" width="10" height="20" rx="4" fill="#06b6d4"/>
+  <path d="M63 94 C65 110 82 110 88 105" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+  <!-- Body / Shoulders -->
+  <path d="M45 165 C45 130 70 125 100 125 C130 125 155 130 155 165" fill="#1e2438" stroke="url(#avatarGrad)" stroke-width="2"/>
+  
+  <!-- Cool terminal / gamer glowing badge -->
+  <rect x="75" y="142" width="50" height="16" rx="8" fill="#0c0e17" stroke="#10b981" stroke-width="1.5"/>
+  <text x="100" y="153" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">&lt;DEV&gt;</text>
+</svg>
