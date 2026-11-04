@@ -61,9 +61,25 @@ kbd { border: 1px solid var(--rule); border-bottom-width: 2px; }
   font-weight: 700; text-decoration: none; letter-spacing: -.01em;
   font-variation-settings: "wdth" 80;
   font-size: 18px;
+  white-space: nowrap;
 }
-.top__nav { display: flex; gap: 22px; }
+.top__right { display: flex; align-items: center; gap: 10px; }
+@media (min-width: 720px) { .top__right { gap: 28px; } }
+.top__nav { display: flex; gap: 10px; font-size: 12px; }
+@media (min-width: 720px) { .top__nav { gap: 22px; font-size: 13px; } }
+@media (max-width: 400px) { .top__name { font-size: 16px; } }
 .top__nav a { text-decoration: none; }
+
+/* sélecteur de langue */
+.lang { display: flex; border: 1px solid var(--ink); }
+.lang button {
+  font: inherit; color: var(--ink); background: none; border: 0;
+  padding: 3px 8px; cursor: pointer; line-height: 1.4;
+}
+.lang button + button { border-left: 1px solid var(--ink); }
+.lang button:hover { color: var(--accent); }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.lang button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ---------- intro ---------- */
 .intro { padding-top: 72px; padding-bottom: 88px; }
@@ -110,8 +126,9 @@ kbd { border: 1px solid var(--rule); border-bottom-width: 2px; }
   align-items: baseline;
   transition: padding-left .18s ease;
 }
-.index a:hover { padding-left: 10px; color: var(--ink); }
-.index a:hover .index__t { color: var(--accent); }
+.index a:hover, .index a:focus-visible { padding-left: 10px; color: var(--ink); }
+.index a:hover .index__t, .index a:focus-visible .index__t { color: var(--accent); }
+.index a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .index__n { color: var(--muted); }
 .index__t { font-size: 22px; font-weight: 700; font-variation-settings: "wdth" 85; letter-spacing: -.01em; }
 .index__d { grid-column: 2 / 4; color: var(--ink-2); }
@@ -125,8 +142,39 @@ kbd { border: 1px solid var(--rule); border-bottom-width: 2px; }
   .index__y { grid-column: auto; grid-row: auto; text-align: right; }
 }
 
+/* aperçu au survol d'un projet */
+.preview {
+  position: fixed; left: 0; top: 0; z-index: 20;
+  width: 320px; max-width: calc(100vw - 24px);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .12s ease;
+}
+.preview.is-on { opacity: 1; }
+.preview img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center 25%; border-bottom: 1px solid var(--ink); background: #000; }
+.preview__txt { padding: 12px 14px 14px; }
+.preview__txt p { margin: 0; font-size: 15px; line-height: 1.45; }
+.preview__n { color: var(--accent); margin-bottom: 6px !important; }
+.preview__s { color: var(--muted); margin-top: 10px !important; font-size: 12px !important; }
+
 /* ---------- case studies ---------- */
-.case { padding-bottom: 120px; }
+.case { padding-top: 28px; padding-bottom: 96px; }
+.back { display: inline-block; margin-bottom: 28px; text-decoration: none; color: var(--muted); }
+.back:hover { color: var(--accent); }
+
+.case__next { margin-top: 96px; border-top: 2px solid var(--ink); }
+.case__next a {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 22px 0; text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+.case__next-t {
+  font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.05;
+  font-variation-settings: "wdth" 72; letter-spacing: -.02em;
+}
+.case__next a:hover .case__next-t { color: var(--accent); }
 .case__head {
   display: grid; gap: 16px 24px;
   border-top: 2px solid var(--ink);
@@ -285,7 +333,7 @@ kbd { border: 1px solid var(--rule); border-bottom-width: 2px; }
   overflow-wrap: anywhere;
 }
 .contact__mail[data-copied]::after {
-  content: " copié";
+  content: " " attr(data-copied-label);
   font-family: var(--mono); font-size: 13px; color: var(--accent);
 }
 
@@ -298,5 +346,5 @@ kbd { border: 1px solid var(--rule); border-bottom-width: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .index a { transition: none; }
+  .index a, .preview { transition: none; }
 }
