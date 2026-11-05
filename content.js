@@ -112,6 +112,40 @@ const SITE = {
   },
 
   // ======================================================================
+  //  Projet phare (bandeau avant la liste des projets)
+  //  id : projet affiché, il doit exister dans `projects` plus bas
+  // ======================================================================
+  flagship: {
+    id: "krampus",
+    img: "assets/img/Editor.png",
+    github: "https://github.com/Oronte/KrampusEngine",
+    fr: {
+      label: "Projet phare",
+      badge: "Projet personnel · en cours",
+      kicker: "C++20 · ImGui · box2d · Seul",
+      title: ["Krampus", "Engine"],
+      sub: "Moteur 2D et éditeur, écrits de zéro",
+      cta: "Voir l'étude technique",
+      github: "Voir sur GitHub",
+      sideTitle: "Ce que j'ai fait",
+      side: ["Éditeur · Rechargement à chaud", "Réseau · Physique · Réflexion"],
+      alt: "L'éditeur de KrampusEngine",
+    },
+    en: {
+      label: "Flagship project",
+      badge: "Personal project · ongoing",
+      kicker: "C++20 · ImGui · box2d · Solo",
+      title: ["Krampus", "Engine"],
+      sub: "2D engine and editor, written from scratch",
+      cta: "Read the technical study",
+      github: "View on GitHub",
+      sideTitle: "What I built",
+      side: ["Editor · Hot reload", "Networking · Physics · Reflection"],
+      alt: "The KrampusEngine editor",
+    },
+  },
+
+  // ======================================================================
   //  Projets
   //  list    : ligne dans la liste
   //  preview : texte de la carte au survol

@@ -55,6 +55,31 @@
 
     const sheet = u.sheet.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
 
+    const f = SITE.flagship;
+    const fd = f[lang];
+    const flagship = `
+  <section class="flagship wrap" aria-labelledby="flagship-title">
+    <div class="flagship__label mono"><span>01</span> ${fd.label}</div>
+    <div class="flagship__card">
+      <img class="flagship__bg" src="${f.img}" alt="${fd.alt}" width="1600" height="900" loading="lazy">
+      <span class="flagship__badge mono">${fd.badge}</span>
+      <div class="flagship__main">
+        <p class="flagship__kicker mono">${fd.kicker}</p>
+        <h2 class="flagship__title" id="flagship-title">${fd.title.join("<br>")}</h2>
+        <p class="flagship__sub">${fd.sub}</p>
+        <div class="flagship__actions mono">
+          <a class="flagship__cta" href="#/p/${f.id}">${fd.cta}</a>
+          <a class="flagship__btn" href="${f.github}">${fd.github}</a>
+        </div>
+      </div>
+      <div class="flagship__side">
+        <p class="flagship__side-t mono">${fd.sideTitle}</p>
+        ${fd.side.map((s) => `<p>${s}</p>`).join("")}
+      </div>
+    </div>
+  </section>
+`;
+
     app.innerHTML = `
   <section class="intro wrap">
     <p class="mono kicker">${u.kicker}</p>
@@ -64,7 +89,7 @@
       <dl class="sheet mono">${sheet}</dl>
     </div>
   </section>
-
+${flagship}
   <section id="projets" class="wrap">
     <div class="sect-head">
       <h2 class="sect-title">${u.projectsTitle}</h2>
