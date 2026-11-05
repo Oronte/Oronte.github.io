@@ -55,6 +55,8 @@
 
     const sheet = u.sheet.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
 
+    const cvBtn = `<a class="cv-btn mono" href="assets/cv-oronte-soler.pdf" download="${u.cvFile}"><span>${u.cv}</span><small>${u.cvMeta}</small></a>`;
+
     const f = SITE.flagship;
     const fd = f[lang];
     const flagship = `
@@ -85,7 +87,10 @@
     <p class="mono kicker">${u.kicker}</p>
     <h1 class="intro__title">${u.introTitle}</h1>
     <div class="intro__grid">
-      <p class="intro__lede">${u.lede}</p>
+      <div>
+        <p class="intro__lede">${u.lede}</p>
+        <p class="intro__cv">${cvBtn}</p>
+      </div>
       <dl class="sheet mono">${sheet}</dl>
     </div>
   </section>
@@ -111,6 +116,7 @@ ${flagship}
     <div class="contact__links">
       <a class="contact__mail" href="mailto:rontou06@gmail.com" data-copy="rontou06@gmail.com" data-copied-label="${u.copied}">rontou06@gmail.com</a>
       <a class="mono" href="https://github.com/Oronte">GitHub ↗</a>
+      ${cvBtn}
     </div>
   </section>`;
   }
