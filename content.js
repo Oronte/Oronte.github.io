@@ -659,52 +659,114 @@ const SITE = {
 
     // ---------------------------------------------------------------- 05
     {
-      id: "jam",
+      id: "laposte",
       n: "05",
-      title: "Body Blagueur",
-      stack: "Unreal Engine",
-      year: { fr: "2024", en: "2024" },
-      img: null,
+      title: "Serious Game La Poste",
+      stack: "VR · Serious game",
+      year: { fr: "2026", en: "2026" },
+      img: "assets/img/presse-midi-libre.jpg",
+      imgPos: "center top", // cadrage de l'image dans la carte d'aperçu
       fr: {
-        list: "Game jam de janvier",
-        preview: "Un jeu fait en temps limité sous Unreal, lors de la game jam de janvier 2024.",
-        sub: "Game jam de janvier 2024, sous Unreal Engine, avec l'équipe Agouginga.",
+        list: "Formation en réalité virtuelle pour La Poste",
+        preview: "Une formation en réalité virtuelle pour les agents de La Poste (Mauguio) : 24 étudiants, plus de cinq mois, deux modules immersifs.",
+        sub: "Un outil de formation en réalité virtuelle pour les agents de la Plateforme industrielle courrier de Mauguio, réalisé avec l'école Objectif 3D.",
         meta: [
-          ["Cadre", "Game jam"],
-          ["Date", "Janvier 2024"],
-          ["Moteur", "Unreal Engine"],
-          ["Équipe", "Agouginga"],
+          ["Cadre", "Projet d'école, commande"],
+          ["Client", "La Poste, plateforme courrier de Mauguio"],
+          ["Équipe", "24 étudiants d'Objectif 3D"],
+          ["Support", "Casque de réalité virtuelle"],
         ],
         body: `
+    <figure class="shot">
+      <video controls preload="metadata" playsinline src="assets/img/LaPosteSeriousGame.mp4#t=0.1">
+        Votre navigateur ne peut pas lire cette vidéo. <a href="assets/img/LaPosteSeriousGame.mp4">Télécharger la vidéo</a>.
+      </video>
+      <figcaption class="mono">Extrait vidéo du serious game.</figcaption>
+    </figure>
+
     <div class="case__body">
       <div class="prose">
-        <!-- À COMPLÉTER : thème de la jam, durée, ton rôle, lien itch.io -->
+        <!-- À COMPLÉTER : ton rôle, le moteur utilisé, ce que tu as programmé -->
         <p>
-          Un jeu fait en temps limité, sous Unreal. Surtout utile pour apprendre à couper une idée en morceaux
-          assez petits pour être finis à temps.
+          La plateforme courrier de La Poste à Mauguio voulait compléter ses formations théoriques par des mises en situation
+          plus concrètes. Pendant plus de cinq mois, 24 étudiants d'Objectif 3D ont créé pour elle deux modules immersifs
+          destinés aux agents.
+        </p>
+        <p>
+          Avec un casque de réalité virtuelle, l'utilisateur évolue dans une reproduction fidèle de son environnement de travail&nbsp;:
+          machines de tri, véhicules, équipements et zones de circulation. Quiz, exercices et scénarios de sécurité permettent
+          de se former de manière progressive et interactive, notamment sur les consignes de sécurité au travail.
+        </p>
+        <p>
+          Le projet a été présenté à La Poste le 27&nbsp;mars&nbsp;2026 et relayé par Midi Libre. Cette première collaboration
+          entre La Poste et l'école pourrait servir de modèle à d'autres plateformes courrier en France.
         </p>
       </div>
+
+      <aside class="notes">
+        <h4 class="mono notes__h">En chiffres</h4>
+        <dl class="figures">
+          <div><dt>24</dt><dd>étudiants sur le projet</dd></div>
+          <div><dt>5+&nbsp;mois</dt><dd>de développement</dd></div>
+          <div><dt>2</dt><dd>modules immersifs</dd></div>
+        </dl>
+
+        <figure class="shot shot--press">
+          <img src="assets/img/presse-midi-libre.jpg" alt="Article de Midi Libre : La Poste innove avec une formation en réalité virtuelle" loading="lazy">
+          <figcaption class="mono">Midi Libre, «&nbsp;La Poste innove avec une formation en réalité virtuelle&nbsp;».</figcaption>
+        </figure>
+      </aside>
     </div>`,
       },
       en: {
-        list: "January game jam",
-        preview: "A game made under time pressure in Unreal, during the January 2024 game jam.",
-        sub: "January 2024 game jam, in Unreal Engine, with team Agouginga.",
+        list: "Virtual reality training for La Poste",
+        preview: "A virtual reality training tool for La Poste agents (Mauguio): 24 students, over five months, two immersive modules.",
+        sub: "A virtual reality training tool for the agents of La Poste's Mauguio mail processing hub, built with the school Objectif 3D.",
         meta: [
-          ["Context", "Game jam"],
-          ["Date", "January 2024"],
-          ["Engine", "Unreal Engine"],
-          ["Team", "Agouginga"],
+          ["Context", "School project, commission"],
+          ["Client", "La Poste, Mauguio mail hub"],
+          ["Team", "24 Objectif 3D students"],
+          ["Platform", "Virtual reality headset"],
         ],
         body: `
+    <figure class="shot">
+      <video controls preload="metadata" playsinline src="assets/img/LaPosteSeriousGame.mp4#t=0.1">
+        Your browser can't play this video. <a href="assets/img/LaPosteSeriousGame.mp4">Download the video</a>.
+      </video>
+      <figcaption class="mono">Video excerpt of the serious game.</figcaption>
+    </figure>
+
     <div class="case__body">
       <div class="prose">
-        <!-- À COMPLÉTER : thème de la jam, durée, ton rôle, lien itch.io -->
+        <!-- À COMPLÉTER : ton rôle, le moteur utilisé, ce que tu as programmé -->
         <p>
-          A game made under time pressure, in Unreal. Mostly useful for learning to cut an idea into pieces
-          small enough to finish on time.
+          La Poste's mail hub in Mauguio wanted to complement its theoretical training with more concrete, hands-on scenarios.
+          For over five months, 24 students from Objectif 3D built two immersive modules for its agents.
+        </p>
+        <p>
+          With a virtual reality headset, the user moves through a faithful reproduction of their workplace:
+          sorting machines, vehicles, equipment and traffic areas. Quizzes, exercises and safety scenarios let them train
+          progressively and interactively, especially on workplace safety rules.
+        </p>
+        <p>
+          The project was presented to La Poste on March 27, 2026 and covered by the newspaper Midi Libre. This first collaboration
+          between La Poste and the school could serve as a model for other mail hubs in France.
         </p>
       </div>
+
+      <aside class="notes">
+        <h4 class="mono notes__h">In numbers</h4>
+        <dl class="figures">
+          <div><dt>24</dt><dd>students on the project</dd></div>
+          <div><dt>5+&nbsp;months</dt><dd>of development</dd></div>
+          <div><dt>2</dt><dd>immersive modules</dd></div>
+        </dl>
+
+        <figure class="shot shot--press">
+          <img src="assets/img/presse-midi-libre.jpg" alt="Midi Libre newspaper article: La Poste innovates with virtual reality training" loading="lazy">
+          <figcaption class="mono">Midi Libre, “La Poste innove avec une formation en réalité virtuelle” (in French).</figcaption>
+        </figure>
+      </aside>
     </div>`,
       },
     },

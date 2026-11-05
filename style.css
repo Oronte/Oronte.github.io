@@ -264,7 +264,10 @@ kbd { border: 1px solid var(--rule); border-bottom-width: 2px; }
 }
 
 .shot { margin: 0 0 48px; }
-.shot img { width: 100%; border: 1px solid var(--ink); background: #000; }
+.shot img, .shot video { width: 100%; border: 1px solid var(--ink); background: #000; }
+.shot video { display: block; max-height: 80vh; }
+.shot--press { margin: 40px 0 0; }
+.shot--press img { background: none; }
 .shot figcaption { margin-top: 10px; color: var(--muted); }
 
 .shot--duo { display: grid; gap: 16px; margin-top: 48px; }

@@ -154,7 +154,8 @@ ${flagship}
   function fillPreview(id) {
     const p = SITE.projects.find((x) => x.id === id);
     const d = p[lang];
-    const img = p.img ? `<img src="${p.img}" alt="">` : "";
+    const pos = p.imgPos ? ` style="object-position:${p.imgPos}"` : "";
+    const img = p.img ? `<img src="${p.img}" alt=""${pos}>` : "";
     previewEl.innerHTML = `${img}
       <div class="preview__txt">
         <p class="preview__n mono">${p.n} · ${p.year[lang]}</p>
