@@ -598,60 +598,276 @@ const SITE = {
       id: "cracalyze",
       n: "04",
       title: "Cracalyze",
-      stack: "Python 3.11 · WSL",
+      stack: "Python 3.11 · Conda · WSL",
       year: { fr: "Stage", en: "Internship" },
       img: null,
       fr: {
         list: "Stage, migration d'un pipeline scientifique",
-        preview: "Migration d'un pipeline de bioinformatique de Python 2.7 vers 3.11, avec des sommes MD5 pour prouver que rien n'a changé.",
-        sub: "Stage à l'IGMM : migration d'un pipeline de bioinformatique de Python 2.7 vers Python 3.11.",
+        preview: "Migration d'un pipeline de bioinformatique de Python 2.7 vers 3.11, avec un correctif dans pyCRAC et des scripts de comparaison MD5 pour contrôler les résultats.",
+        sub: "Stage à l'IGMM : migration d'un pipeline d'analyse de données de séquençage de Python 2.7 vers Python 3.11.",
         meta: [
-          ["Cadre", "Stage"],
+          ["Cadre", "Stage, juin – juillet 2026"],
           ["Lieu", "IGMM, Institut de Génétique Moléculaire de Montpellier"],
           ["Langage", "Python 2.7 → 3.11"],
-          ["Environnement", "WSL"],
+          ["Environnement", "WSL, Conda, VS Code"],
         ],
         body: `
+    <figure class="diagram">
+      <ol class="pipe pipe--5 mono" aria-label="Étapes du pipeline cracalyze">
+        <li><b>FASTQ</b><span>lectures brutes du séquenceur</span></li>
+        <li><b>Démultiplexage</b><span>un dossier par expérience</span></li>
+        <li><b>Mapping</b><span>position sur le génome</span></li>
+        <li><b>Normalisation</b><span>même nombre de lectures pour tous</span></li>
+        <li><b>Peaks</b><span>sites de fixation des protéines</span></li>
+      </ol>
+      <figcaption class="mono">Ce que fait cracalyze&nbsp;: de millions de lectures brutes jusqu'aux endroits où une protéine s'est fixée sur l'ARN.</figcaption>
+    </figure>
+
     <div class="case__body">
       <div class="prose">
         <p>
-          Pas du jeu vidéo, mais le stage où j'ai le plus appris sur le code des autres. J'ai migré un pipeline de
-          bioinformatique de Python&nbsp;2.7 vers Python&nbsp;3.11. Il analyse des données de séquençage pour trouver où
-          des protéines se fixent sur l'ARN.
+          Pas du jeu vidéo, mais le stage où j'ai le plus appris sur le code des autres. L'IGMM utilise un pipeline de
+          bioinformatique, <code>cracalyze</code>, pour analyser des données issues de la technique CRAC, qui sert à repérer
+          sur l'ARN les endroits précis où des protéines viennent se fixer. Il était écrit pour Python&nbsp;2.7, abandonné
+          depuis janvier&nbsp;2020, et devenait de plus en plus difficile à faire tourner sur les machines actuelles.
+          Ma mission&nbsp;: le migrer vers Python&nbsp;3.11.
         </p>
         <p>
-          Le point dur était un bug dans <code>pyCRAC</code>, une bibliothèque utilisée par d'autres labos&nbsp;: annoncée compatible
-          Python&nbsp;3, elle mélangeait <code>bytes</code> et <code>str</code> et écrivait des fichiers faux sans erreur.
-          Pour prouver que la migration ne changeait aucun résultat, j'ai écrit des scripts qui comparent les sorties
-          de deux exécutions, fichier par fichier, avec des sommes MD5.
+          <strong>Ce que fait le pipeline.</strong> Le point de départ est un fichier FASTQ&nbsp;: des millions de courtes
+          séquences de lettres, une par fragment d'ARN lu par le séquenceur. <code>cracalyze</code> les trie par expérience,
+          les place sur le génome de référence, puis ramène chaque échantillon au même nombre de lectures (10&nbsp;millions
+          par exemple) pour qu'on puisse les comparer. Enfin il cherche les <em>pics</em>&nbsp;: les endroits du génome où
+          les lectures s'accumulent bien plus qu'ailleurs. C'est là qu'une protéine s'est fixée.
         </p>
+        <p>
+          <strong>Le tri repose sur une étiquette.</strong> Pour gagner du temps et de l'argent, plusieurs expériences passent
+          ensemble dans le séquenceur. Chaque fragment porte donc une étiquette de 11&nbsp;lettres, lue au démultiplexage&nbsp;:
+        </p>
+
+        <figure class="diagram barcode">
+          <div class="barcode__row mono" role="img" aria-label="Structure de l'étiquette : 5 lettres aléatoires, 3 lettres d'identification, AGC, puis le fragment d'ARN">
+            <div class="bc bc--umi"><b>NNNNN</b><span>5 lettres aléatoires</span><em>repèrent les doublons de PCR</em></div>
+            <div class="bc bc--id"><b>XXX</b><span>3 lettres</span><em>identifient l'expérience</em></div>
+            <div class="bc bc--fix"><b>AGC</b><span>3 lettres fixes</span><em>accroche de l'adaptateur</em></div>
+            <div class="bc bc--rest"><b>…</b><span>reste de la lecture</span><em>le fragment d'ARN</em></div>
+          </div>
+          <figcaption class="mono">Structure d'une lecture. L'adaptateur est un court brin synthétique qui rend le fragment lisible par le séquenceur.</figcaption>
+        </figure>
+
+        <p>
+          C'est un tri postal&nbsp;: les 3 lettres d'identification disent dans quel dossier envoyer chaque lecture. Les 5 lettres
+          aléatoires servent à ne pas compter dix fois un fragment qui a simplement été copié dix fois par la PCR, l'étape qui
+          «&nbsp;photocopie&nbsp;» les fragments avant le séquençage.
+        </p>
+        <p>
+          <strong>Le bug dans pyCRAC.</strong> <code>cracalyze</code> s'appuie sur <code>pyCRAC</code>, une bibliothèque utilisée
+          par d'autres labos. Elle se disait compatible Python&nbsp;2.7 et 3.x, mais ne l'était qu'avec 2.7&nbsp;: elle mélangeait
+          <code>bytes</code> et <code>str</code>, ce qui faisait apparaître des <code>b'…'</code> partout dans les fichiers de
+          sortie, devenus illisibles. J'ai trouvé l'origine du problème, vérifié son effet sur les traitements, puis corrigé
+          le code source pour le rendre compatible avec Python&nbsp;3.11. Sans ça, la seule solution était de rester sur Python&nbsp;2.7.
+        </p>
+        <p>
+          <strong>Comment je vérifiais que rien ne cassait.</strong> Impossible de juger à l'œil des dossiers de résultats entiers.
+          J'ai écrit deux scripts&nbsp;: l'un compare deux dossiers fichier par fichier, avec le détail pour chaque type de fichier&nbsp;;
+          l'autre calcule la somme MD5 de chaque fichier pour savoir si deux dossiers sont identiques au bit près.
+          (J'avais d'abord essayé de zipper chaque dossier pour ne comparer qu'un fichier. Mais le zip ajoute ses propres
+          informations&nbsp;: il annonçait des différences qui n'existaient pas.) Le schéma en bas de la page résume le principe.
+        </p>
+
+        <p>
+          <strong>Où ça en est.</strong> La pipeline tourne de bout en bout sous Python&nbsp;3.11. Avec Python&nbsp;2.7, les sorties sont
+          identiques au bit près entre ma machine et le serveur du labo. Entre 2.7 et 3.11, elles sont très proches mais pas encore
+          strictement identiques. On soupçonne la division, qui ne se comporte pas pareil dans les deux versions
+          (<code>/</code> contre <code>//</code>), mais c'est à analyser. J'ai documenté les difficultés rencontrées et expliqué
+          mes modifications au bioinformaticien qui reprend le projet.
+        </p>
+      </div>
+
+      <aside class="notes">
+        <h4 class="mono notes__h">Ce que j'ai fait</h4>
+        <ul class="notes__list">
+          <li>Environnement reconstruit sous WSL et Conda, avec VS Code</li>
+          <li>Migration Python&nbsp;2.7 → 3.11&nbsp;: <code>print</code>, <code>bytes</code> / <code>str</code>, divisions</li>
+          <li>Correctif de <code>pyCRAC</code> pour Python&nbsp;3.11</li>
+          <li>Scripts de comparaison de résultats&nbsp;: fichier par fichier et MD5</li>
+          <li>Tests sur un FASTQ réduit avec <code>seqtk</code></li>
+          <li>Problèmes d'environnement&nbsp;: droits d'accès, dépendances, <code>wigToBigWig</code></li>
+          <li>Documentation pour la reprise du projet</li>
+        </ul>
+
+        <h4 class="mono notes__h">En chiffres</h4>
+        <dl class="figures">
+          <div><dt>13&nbsp;Go</dt><dd>le plus petit FASTQ disponible, réduit pour que chaque test ne prenne pas des heures</dd></div>
+          <div><dt>2.7 → 3.11</dt><dd>version de Python visée par la migration</dd></div>
+          <div><dt>2</dt><dd>scripts de comparaison des résultats</dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <figure class="diagram">
+          <div class="flow mono" role="img" aria-label="Même FASTQ passé dans cracalyze sous Python 2.7 et sous Python 3.11, puis comparaison des dossiers de sortie par MD5">
+            <div class="flow__c flow__in"><b>FASTQ réduit</b><span>seqtk, mêmes proportions que l'original</span></div>
+            <div class="flow__c flow__run27"><b>cracalyze</b><span>Python 2.7 (référence)</span></div>
+            <div class="flow__c flow__out27"><b>Dossier de sortie</b><span>tous les fichiers produits</span></div>
+            <div class="flow__c flow__run311"><b>cracalyze</b><span>Python 3.11 (migré)</span></div>
+            <div class="flow__c flow__out311"><b>Dossier de sortie</b><span>tous les fichiers produits</span></div>
+            <div class="flow__c flow__cmp"><b>Comparaison</b><span>MD5 de chaque fichier, détail par type de fichier</span></div>
+          </div>
+          <figcaption class="mono">Même entrée, deux versions de Python, puis comparaison des sorties fichier par fichier.</figcaption>
+        </figure>
+
+    <div class="lessons">
+      <h4 class="mono notes__h">Problèmes rencontrés</h4>
+      <div class="lessons__grid">
+        <div>
+          <p class="lessons__q">Des <code>b'…'</code> dans tous les fichiers.</p>
+          <p>pyCRAC annonçait Python&nbsp;3 mais mélangeait <code>bytes</code> et <code>str</code>. J'ai corrigé son code source
+          plutôt que de contourner le problème dans cracalyze.</p>
+        </div>
+        <div>
+          <p class="lessons__q">Un environnement Conda impossible à cloner.</p>
+          <p>Le fichier <code>.yml</code> ne listait pas ce qui avait été installé avec pip. J'ai donc déplacé tout le dossier
+          de l'environnement vers ma machine, puis je l'ai placé avec <code>sudo</code> pour que cracalyze ait les droits nécessaires.</p>
+        </div>
+        <div>
+          <p class="lessons__q">Une matinée perdue sur <code>wigToBigWig</code>.</p>
+          <p>L'outil refusait de fonctionner. La cause&nbsp;: deux scripts manquaient à l'endroit attendu. Il a suffi de les copier
+          au bon endroit, mais il m'a fallu la matinée pour le comprendre.</p>
+        </div>
       </div>
     </div>`,
       },
       en: {
         list: "Internship, scientific pipeline migration",
-        preview: "Migration of a bioinformatics pipeline from Python 2.7 to 3.11, with MD5 sums to prove nothing changed.",
-        sub: "Internship at the IGMM: migrating a bioinformatics pipeline from Python 2.7 to Python 3.11.",
+        preview: "Migration of a bioinformatics pipeline from Python 2.7 to 3.11, with a fix in pyCRAC and MD5 comparison scripts to check the results.",
+        sub: "Internship at the IGMM: migrating a sequencing-data analysis pipeline from Python 2.7 to Python 3.11.",
         meta: [
-          ["Context", "Internship"],
+          ["Context", "Internship, June – July 2026"],
           ["Place", "IGMM, Montpellier Institute of Molecular Genetics"],
           ["Language", "Python 2.7 → 3.11"],
-          ["Environment", "WSL"],
+          ["Environment", "WSL, Conda, VS Code"],
         ],
         body: `
+    <figure class="diagram">
+      <ol class="pipe pipe--5 mono" aria-label="Steps of the cracalyze pipeline">
+        <li><b>FASTQ</b><span>raw reads from the sequencer</span></li>
+        <li><b>Demultiplexing</b><span>one folder per experiment</span></li>
+        <li><b>Mapping</b><span>position on the genome</span></li>
+        <li><b>Normalization</b><span>same number of reads for all</span></li>
+        <li><b>Peaks</b><span>protein binding sites</span></li>
+      </ol>
+      <figcaption class="mono">What cracalyze does: from millions of raw reads to the places where a protein attached to the RNA.</figcaption>
+    </figure>
+
     <div class="case__body">
       <div class="prose">
         <p>
-          Not game development, but the internship where I learned the most about other people's code. I migrated a
-          bioinformatics pipeline from Python&nbsp;2.7 to Python&nbsp;3.11. It analyzes sequencing data to find where
-          proteins bind to RNA.
+          Not game development, but the internship where I learned the most about other people's code. The IGMM uses a
+          bioinformatics pipeline, <code>cracalyze</code>, to analyze data from the CRAC technique, which finds the exact
+          spots on RNA where proteins attach. It was written for Python&nbsp;2.7, unmaintained since January&nbsp;2020, and was
+          getting harder and harder to run on current machines. My mission: migrate it to Python&nbsp;3.11.
         </p>
         <p>
-          The hard part was a bug in <code>pyCRAC</code>, a library used by other labs: advertised as Python&nbsp;3 compatible,
-          it mixed <code>bytes</code> and <code>str</code> and wrote wrong files without any error.
-          To prove the migration changed no result, I wrote scripts that compare the outputs of two runs,
-          file by file, using MD5 sums.
+          <strong>What the pipeline does.</strong> The starting point is a FASTQ file: millions of short sequences of letters,
+          one per RNA fragment read by the sequencer. <code>cracalyze</code> sorts them by experiment, places them on the
+          reference genome, then brings every sample down to the same number of reads (10&nbsp;million, for example) so they
+          can be compared. Finally it looks for <em>peaks</em>: places on the genome where reads pile up far more than
+          elsewhere. That's where a protein attached.
         </p>
+        <p>
+          <strong>Sorting relies on a tag.</strong> To save time and money, several experiments go through the sequencer
+          together. Each fragment therefore carries an 11-letter tag, read during demultiplexing:
+        </p>
+
+        <figure class="diagram barcode">
+          <div class="barcode__row mono" role="img" aria-label="Tag structure: 5 random letters, 3 identification letters, AGC, then the RNA fragment">
+            <div class="bc bc--umi"><b>NNNNN</b><span>5 random letters</span><em>spot PCR duplicates</em></div>
+            <div class="bc bc--id"><b>XXX</b><span>3 letters</span><em>identify the experiment</em></div>
+            <div class="bc bc--fix"><b>AGC</b><span>3 fixed letters</span><em>adapter attachment point</em></div>
+            <div class="bc bc--rest"><b>…</b><span>rest of the read</span><em>the RNA fragment</em></div>
+          </div>
+          <figcaption class="mono">Structure of a read. The adapter is a short synthetic strand that makes the fragment readable by the sequencer.</figcaption>
+        </figure>
+
+        <p>
+          It works like mail sorting: the 3 identification letters say which folder each read goes to. The 5 random letters
+          prevent counting a fragment ten times when it was simply copied ten times by PCR, the step that
+          “photocopies” fragments before sequencing.
+        </p>
+        <p>
+          <strong>The bug in pyCRAC.</strong> <code>cracalyze</code> relies on <code>pyCRAC</code>, a library used by other labs.
+          It claimed to support Python&nbsp;2.7 and 3.x, but only worked with 2.7: it mixed <code>bytes</code> and
+          <code>str</code>, which put <code>b'…'</code> all over the output files, making them unreadable. I found the
+          origin of the problem, checked its effect on the processing, then fixed the source code to make it compatible with
+          Python&nbsp;3.11. Without that, the only option was to stay on Python&nbsp;2.7.
+        </p>
+        <p>
+          <strong>How I checked that nothing broke.</strong> You can't judge whole results folders by eye. I wrote two scripts:
+          one compares two folders file by file, with details for each file type; the other computes the MD5 sum of every
+          file to tell whether two folders are identical down to the bit. (I first tried zipping each folder to compare a single
+          file. But zip adds its own information: it reported differences that didn't exist.) The diagram at the bottom of the page sums up the principle.
+        </p>
+
+        <p>
+          <strong>Where it stands.</strong> The pipeline runs end to end under Python&nbsp;3.11. With Python&nbsp;2.7, outputs are
+          identical down to the bit between my machine and the lab's server. Between 2.7 and 3.11, they are very close but
+          not strictly identical yet. We suspect division, which doesn't behave the same in the two versions
+          (<code>/</code> versus <code>//</code>), but that remains to be analyzed. I documented the difficulties I ran into
+          and walked the bioinformatician taking over the project through my changes.
+        </p>
+      </div>
+
+      <aside class="notes">
+        <h4 class="mono notes__h">What I did</h4>
+        <ul class="notes__list">
+          <li>Environment rebuilt under WSL and Conda, with VS Code</li>
+          <li>Python&nbsp;2.7 → 3.11 migration: <code>print</code>, <code>bytes</code> / <code>str</code>, divisions</li>
+          <li><code>pyCRAC</code> fix for Python&nbsp;3.11</li>
+          <li>Result comparison scripts: file by file and MD5</li>
+          <li>Tests on a reduced FASTQ with <code>seqtk</code></li>
+          <li>Environment issues: permissions, dependencies, <code>wigToBigWig</code></li>
+          <li>Documentation for the handover</li>
+        </ul>
+
+        <h4 class="mono notes__h">In numbers</h4>
+        <dl class="figures">
+          <div><dt>13&nbsp;GB</dt><dd>the smallest FASTQ available, reduced so each test doesn't take hours</dd></div>
+          <div><dt>2.7 → 3.11</dt><dd>Python version targeted by the migration</dd></div>
+          <div><dt>2</dt><dd>result comparison scripts</dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <figure class="diagram">
+          <div class="flow mono" role="img" aria-label="The same FASTQ run through cracalyze under Python 2.7 and Python 3.11, then the output folders compared with MD5">
+            <div class="flow__c flow__in"><b>Reduced FASTQ</b><span>seqtk, same proportions as the original</span></div>
+            <div class="flow__c flow__run27"><b>cracalyze</b><span>Python 2.7 (reference)</span></div>
+            <div class="flow__c flow__out27"><b>Output folder</b><span>every file produced</span></div>
+            <div class="flow__c flow__run311"><b>cracalyze</b><span>Python 3.11 (migrated)</span></div>
+            <div class="flow__c flow__out311"><b>Output folder</b><span>every file produced</span></div>
+            <div class="flow__c flow__cmp"><b>Comparison</b><span>MD5 of each file, details per file type</span></div>
+          </div>
+          <figcaption class="mono">Same input, two Python versions, then the outputs compared file by file.</figcaption>
+        </figure>
+
+    <div class="lessons">
+      <h4 class="mono notes__h">Problems I ran into</h4>
+      <div class="lessons__grid">
+        <div>
+          <p class="lessons__q"><code>b'…'</code> in every file.</p>
+          <p>pyCRAC advertised Python&nbsp;3 support but mixed <code>bytes</code> and <code>str</code>. I fixed its source code
+          rather than working around the problem inside cracalyze.</p>
+        </div>
+        <div>
+          <p class="lessons__q">A Conda environment that couldn't be cloned.</p>
+          <p>The <code>.yml</code> file didn't list what had been installed with pip. So I moved the whole environment folder
+          to my machine, then placed it using <code>sudo</code> so cracalyze had the permissions it needed.</p>
+        </div>
+        <div>
+          <p class="lessons__q">A lost morning on <code>wigToBigWig</code>.</p>
+          <p>The tool refused to work. The cause: two scripts were missing from the expected location. Copying them to the right
+          place was enough, but it took me the whole morning to understand that.</p>
+        </div>
       </div>
     </div>`,
       },
@@ -768,6 +984,128 @@ const SITE = {
         </figure>
       </aside>
     </div>`,
+      },
+    },
+
+    // ---------------------------------------------------------------- 06
+    {
+      id: "bamphy",
+      n: "06",
+      title: "Bamphy",
+      stack: "UE 5 · C++",
+      year: { fr: "2025", en: "2025" },
+      img: "assets/img/bamphy-preview.jpg",
+      fr: {
+        list: "Jeu de puzzles 3D, projet d'école",
+        preview: "Un jeu de puzzles en 3D sous Unreal Engine 5, fait en équipe. J'y ai programmé des mécaniques de gameplay et des outils.",
+        sub: "Jeu de puzzles en 3D sous Unreal Engine 5, où le joueur utilise des pouvoirs pour avancer. Projet d'école, en équipe.",
+        meta: [
+          ["Cadre", "Projet d'école"],
+          ["Équipe", "5 à 10 personnes"],
+          ["Moteur", "Unreal Engine 5"],
+          ["Langage", "C++"],
+        ],
+        body: `
+    <figure class="shot">
+      <video controls preload="metadata" playsinline poster="assets/img/bamphy-poster.jpg" src="assets/img/bamphy.mp4">
+        Votre navigateur ne peut pas lire cette vidéo. <a href="assets/img/bamphy.mp4">Télécharger la vidéo</a>.
+      </video>
+      <figcaption class="mono">Bande-annonce de Bamphy.</figcaption>
+    </figure>
+
+    <div class="case__body">
+      <div class="prose">
+        <!-- À COMPLÉTER : le principe du jeu, le détail des mécaniques et des outils que tu as programmés, lien éventuel -->
+        <p>
+          Bamphy est un jeu de puzzles en 3D, réalisé en équipe dans le cadre de l'école. Le joueur explore un monde de temples
+          et résout plusieurs énigmes.
+        </p>
+        <p>
+          Mon travail a porté sur les <strong>mécaniques de gameplay</strong> et sur des <strong>outils et systèmes</strong>
+          en C++. Les mécaniques sont celles que montre la deuxième vidéo, en bas de page&nbsp;: le joueur choisit un pouvoir
+          avec la molette de la souris, puis l'utilise avec le clic gauche, par exemple pour déplacer des objets à distance
+          avec la télékinésie.
+        </p>
+      </div>
+
+      <aside class="notes">
+        <h4 class="mono notes__h">Mon rôle</h4>
+        <ul class="notes__list">
+          <li>Mécaniques de gameplay</li>
+          <li>Outils et systèmes</li>
+        </ul>
+
+        <h4 class="mono notes__h">Pouvoirs visibles dans la vidéo</h4>
+        <ul class="notes__list">
+          <li>Télékinésie</li>
+          <li>Téléportation</li>
+          <li>Croissance</li>
+        </ul>
+      </aside>
+    </div>
+
+    <figure class="shot">
+      <video controls preload="metadata" playsinline poster="assets/img/bamphy-mechanics-poster.jpg" src="assets/img/bamphy-mechanics.mp4">
+        Votre navigateur ne peut pas lire cette vidéo. <a href="assets/img/bamphy-mechanics.mp4">Télécharger la vidéo</a>.
+      </video>
+      <figcaption class="mono">Les mécaniques en jeu&nbsp;: choix du pouvoir à la molette, utilisation au clic gauche.</figcaption>
+    </figure>`,
+      },
+      en: {
+        list: "3D puzzle game, school project",
+        preview: "A 3D puzzle game in Unreal Engine 5, made in a team. I programmed gameplay mechanics and tools.",
+        sub: "A 3D puzzle game in Unreal Engine 5, where the player uses powers to progress. School project, in a team.",
+        meta: [
+          ["Context", "School project"],
+          ["Team", "5 to 10 people"],
+          ["Engine", "Unreal Engine 5"],
+          ["Language", "C++"],
+        ],
+        body: `
+    <figure class="shot">
+      <video controls preload="metadata" playsinline poster="assets/img/bamphy-poster.jpg" src="assets/img/bamphy.mp4">
+        Your browser can't play this video. <a href="assets/img/bamphy.mp4">Download the video</a>.
+      </video>
+      <figcaption class="mono">Bamphy trailer.</figcaption>
+    </figure>
+
+    <div class="case__body">
+      <div class="prose">
+        <!-- À COMPLÉTER : le principe du jeu, le détail des mécaniques et des outils que tu as programmés, lien éventuel -->
+        <p>
+          Bamphy is a 3D puzzle game, made in a team as a school project. The player explores a world of temples
+          and solves several puzzles.
+        </p>
+        <p>
+          My work covered <strong>gameplay mechanics</strong> and <strong>tools and systems</strong> in C++.
+          The mechanics are the ones shown in the second video, at the bottom of the page: the player picks a power
+          with the mouse wheel, then uses it with the left mouse button, for example to move objects from a distance
+          with telekinesis.
+        </p>
+      </div>
+
+      <aside class="notes">
+        <h4 class="mono notes__h">My role</h4>
+        <ul class="notes__list">
+          <li>Gameplay mechanics</li>
+          <li>Tools and systems</li>
+        </ul>
+
+        <h4 class="mono notes__h">Powers seen in the video</h4>
+        <ul class="notes__list">
+          <li>Telekinesis</li>
+          <li>Teleport</li>
+          <li>Growth</li>
+        </ul>
+      </aside>
+    </div>
+
+    <figure class="shot">
+      <video controls preload="metadata" playsinline poster="assets/img/bamphy-mechanics-poster.jpg" src="assets/img/bamphy-mechanics.mp4">
+        Your browser can't play this video. <a href="assets/img/bamphy-mechanics.mp4">Download the video</a>.
+      </video>
+      <figcaption class="mono">The mechanics in game: pick a power with the mouse wheel, use it with the left mouse button.</figcaption>
+    </figure>`,
       },
     },
   ],
