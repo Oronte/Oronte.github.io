@@ -514,6 +514,7 @@ const SITE = {
           ["Moteur", "Unity (URP)"],
           ["Langage", "C#"],
           ["Build", "30.10.2026"],
+          ["Versions", "Perforce"],
         ],
         body: `
     <div class="case__body case__body--img">
@@ -557,6 +558,7 @@ const SITE = {
           ["Engine", "Unity (URP)"],
           ["Language", "C#"],
           ["Build", "Oct 30, 2026"],
+          ["Versioning", "Perforce"],
         ],
         body: `
     <div class="case__body case__body--img">
@@ -891,6 +893,7 @@ const SITE = {
           ["Client", "La Poste, plateforme courrier de Mauguio"],
           ["Équipe", "24 étudiants d'Objectif 3D"],
           ["Support", "Casque de réalité virtuelle"],
+          ["Versions", "Perforce"],
         ],
         body: `
     <figure class="shot">
@@ -902,7 +905,7 @@ const SITE = {
 
     <div class="case__body">
       <div class="prose">
-        <!-- À COMPLÉTER : ton rôle, le moteur utilisé, ce que tu as programmé -->
+        <!-- À COMPLÉTER : le moteur utilisé -->
         <p>
           La plateforme courrier de La Poste à Mauguio voulait compléter ses formations théoriques par des mises en situation
           plus concrètes. Pendant plus de cinq mois, 24 étudiants d'Objectif 3D ont créé pour elle deux modules immersifs
@@ -914,12 +917,33 @@ const SITE = {
           de se former de manière progressive et interactive, notamment sur les consignes de sécurité au travail.
         </p>
         <p>
+          <strong>Ce que j'ai réalisé.</strong> Trois séquences&nbsp;:
+        </p>
+        <ul class="plain">
+          <li>la <b>conduite du véhicule</b>&nbsp;;</li>
+          <li>le <b>démontage et le remontage du véhicule</b>, pour apprendre à remplacer la batterie du transpalette&nbsp;;</li>
+          <li>le <b>tri des lettres</b>, pour apprendre au futur employé à reconnaître les lettres mécanisables (celles qui peuvent
+            passer dans les machines de tri) et celles qui ne le sont pas.</li>
+        </ul>
+        <p>
+          <strong>La contrainte du casque.</strong> Pour chacune de ces séquences, il fallait surveiller les performances&nbsp;:
+          en réalité virtuelle, si le nombre d'images par seconde est trop bas, l'utilisateur peut avoir la nausée.
+        </p>
+        <p>
           Le projet a été présenté à La Poste le 27&nbsp;mars&nbsp;2026 et relayé par Midi Libre. Cette première collaboration
           entre La Poste et l'école pourrait servir de modèle à d'autres plateformes courrier en France.
         </p>
       </div>
 
       <aside class="notes">
+        <h4 class="mono notes__h">Mon rôle</h4>
+        <ul class="notes__list">
+          <li>Conduite du véhicule</li>
+          <li>Démontage et remontage (batterie du transpalette)</li>
+          <li>Tri des lettres, mécanisables ou non</li>
+          <li>Performances en VR (images par seconde)</li>
+        </ul>
+
         <h4 class="mono notes__h">En chiffres</h4>
         <dl class="figures">
           <div><dt>24</dt><dd>étudiants sur le projet</dd></div>
@@ -943,6 +967,7 @@ const SITE = {
           ["Client", "La Poste, Mauguio mail hub"],
           ["Team", "24 Objectif 3D students"],
           ["Platform", "Virtual reality headset"],
+          ["Versioning", "Perforce"],
         ],
         body: `
     <figure class="shot">
@@ -954,7 +979,7 @@ const SITE = {
 
     <div class="case__body">
       <div class="prose">
-        <!-- À COMPLÉTER : ton rôle, le moteur utilisé, ce que tu as programmé -->
+        <!-- À COMPLÉTER : le moteur utilisé -->
         <p>
           La Poste's mail hub in Mauguio wanted to complement its theoretical training with more concrete, hands-on scenarios.
           For over five months, 24 students from Objectif 3D built two immersive modules for its agents.
@@ -965,12 +990,33 @@ const SITE = {
           progressively and interactively, especially on workplace safety rules.
         </p>
         <p>
+          <strong>What I built.</strong> Three sequences:
+        </p>
+        <ul class="plain">
+          <li><b>driving the vehicle</b>;</li>
+          <li><b>taking the vehicle apart and putting it back together</b>, to learn how to replace the pallet truck's battery;</li>
+          <li><b>sorting letters</b>, to teach the future employee to recognize which letters are machinable (can go through
+            the sorting machines) and which are not.</li>
+        </ul>
+        <p>
+          <strong>The headset constraint.</strong> For each of these sequences, performance had to be watched closely:
+          in virtual reality, if the frame rate is too low, the user can feel nauseous.
+        </p>
+        <p>
           The project was presented to La Poste on March 27, 2026 and covered by the newspaper Midi Libre. This first collaboration
           between La Poste and the school could serve as a model for other mail hubs in France.
         </p>
       </div>
 
       <aside class="notes">
+        <h4 class="mono notes__h">My role</h4>
+        <ul class="notes__list">
+          <li>Driving the vehicle</li>
+          <li>Disassembly and reassembly (pallet truck battery)</li>
+          <li>Letter sorting, machinable or not</li>
+          <li>VR performance (frames per second)</li>
+        </ul>
+
         <h4 class="mono notes__h">In numbers</h4>
         <dl class="figures">
           <div><dt>24</dt><dd>students on the project</dd></div>
@@ -1004,6 +1050,8 @@ const SITE = {
           ["Équipe", "5 à 10 personnes"],
           ["Moteur", "Unreal Engine 5"],
           ["Langage", "C++"],
+          ["Versions", "Perforce"],
+          ["Installer", '<a href="https://mega.nz/file/GmwWxKQT#liAp8ehl5I8Duh5xmhFQQLrv3My0EKgrLC6pXS6riqg" rel="noopener">Télécharger (Mega)</a>'],
         ],
         body: `
     <figure class="shot">
@@ -1029,6 +1077,9 @@ const SITE = {
       </div>
 
       <aside class="notes">
+        <h4 class="mono notes__h">Jouer</h4>
+        <p class="notes__btn"><a class="btn mono" href="https://mega.nz/file/GmwWxKQT#liAp8ehl5I8Duh5xmhFQQLrv3My0EKgrLC6pXS6riqg" rel="noopener"><span>Installer le jeu</span><small>Mega</small></a></p>
+
         <h4 class="mono notes__h">Mon rôle</h4>
         <ul class="notes__list">
           <li>Mécaniques de gameplay</li>
@@ -1060,6 +1111,8 @@ const SITE = {
           ["Team", "5 to 10 people"],
           ["Engine", "Unreal Engine 5"],
           ["Language", "C++"],
+          ["Versioning", "Perforce"],
+          ["Install", '<a href="https://mega.nz/file/GmwWxKQT#liAp8ehl5I8Duh5xmhFQQLrv3My0EKgrLC6pXS6riqg" rel="noopener">Download (Mega)</a>'],
         ],
         body: `
     <figure class="shot">
@@ -1085,6 +1138,9 @@ const SITE = {
       </div>
 
       <aside class="notes">
+        <h4 class="mono notes__h">Play</h4>
+        <p class="notes__btn"><a class="btn mono" href="https://mega.nz/file/GmwWxKQT#liAp8ehl5I8Duh5xmhFQQLrv3My0EKgrLC6pXS6riqg" rel="noopener"><span>Install the game</span><small>Mega</small></a></p>
+
         <h4 class="mono notes__h">My role</h4>
         <ul class="notes__list">
           <li>Gameplay mechanics</li>
@@ -1105,6 +1161,132 @@ const SITE = {
         Your browser can't play this video. <a href="assets/img/bamphy-mechanics.mp4">Download the video</a>.
       </video>
       <figcaption class="mono">The mechanics in game: pick a power with the mouse wheel, use it with the left mouse button.</figcaption>
+    </figure>`,
+      },
+    },
+
+    // ---------------------------------------------------------------- 07
+    {
+      id: "steam",
+      n: "07",
+      title: "Despair & Nelli The Seer",
+      stack: "Steam · Rebind · Loc.",
+      year: { fr: "2025 – 2026", en: "2025 – 2026" },
+      img: "assets/img/rebind-nelli.png",
+      fr: {
+        list: "Rebind, succès Steam et localisation",
+        preview: "Rebind des touches, succès Steam et localisation FR/EN sur deux jeux d'école publiés sur Steam : Nelli The Seer et Despair.",
+        sub: "Rebind des touches, succès Steam et localisation français / anglais pour deux jeux d'école publiés sur Steam.",
+        meta: [
+          ["Cadre", "Jeux d'école publiés sur Steam"],
+          ["Éditeur", "Objectif 3D"],
+          ["Systèmes", "Rebind, succès, localisation"],
+          ["Steam", '<a href="https://store.steampowered.com/app/3801320/Nelli_The_Seer/" rel="noopener">Nelli The Seer</a>, <a href="https://store.steampowered.com/app/4456120/Despair/" rel="noopener">Despair</a>'],
+        ],
+        body: `
+    <figure class="shot">
+      <img src="assets/img/rebind-nelli.png" alt="Menu « Configuration des touches » de Nelli The Seer : mouvement et interaction, boutons Retour et Réinitialiser" width="1920" height="1080">
+      <figcaption class="mono">Le menu de configuration des touches de Nelli The Seer.</figcaption>
+    </figure>
+
+    <div class="case__body">
+      <div class="prose">
+        <!-- À COMPLÉTER : moteur, détails techniques (sauvegarde des touches, API Steamworks, tables de traduction), ce qui était difficile -->
+        <p>
+          Deux jeux d'étudiants publiés gratuitement sur Steam par l'école Objectif 3D&nbsp;: <strong>Nelli The Seer</strong>
+          (juillet 2025), un jeu de plateforme à la troisième personne dans le Templo Mayor, et <strong>Despair</strong>
+          (septembre 2026), un jeu d'infiltration dans une Constantinople maudite. Sur les deux, j'ai réalisé les mêmes trois
+          systèmes, ceux qu'attendent les joueurs d'un jeu sur Steam&nbsp;:
+        </p>
+        <ul class="plain">
+          <li>le <b>rebind des touches</b>&nbsp;: le joueur redéfinit ses commandes depuis un menu de configuration
+            (mouvement, interaction), avec un bouton pour tout réinitialiser&nbsp;;</li>
+          <li>les <b>succès Steam</b>&nbsp;: Despair en compte 8&nbsp;;</li>
+          <li>la <b>localisation</b>&nbsp;: les deux jeux se jouent en français et en anglais.</li>
+        </ul>
+      </div>
+
+      <aside class="notes">
+        <h4 class="mono notes__h">Les deux jeux</h4>
+        <ul class="notes__list">
+          <li><b>Nelli The Seer</b>, plateforme et jeu de mémoire à la troisième personne, sorti le 8 juillet 2025.
+            <a href="https://store.steampowered.com/app/3801320/Nelli_The_Seer/" rel="noopener">Steam&nbsp;↗</a></li>
+          <li><b>Despair</b>, jeu d'infiltration à la troisième personne, sorti le 29 septembre 2026.
+            <a href="https://store.steampowered.com/app/4456120/Despair/" rel="noopener">Steam&nbsp;↗</a></li>
+        </ul>
+
+        <h4 class="mono notes__h">En chiffres</h4>
+        <dl class="figures">
+          <div><dt>2</dt><dd>jeux publiés sur Steam</dd></div>
+          <div><dt>8</dt><dd>succès Steam sur Despair</dd></div>
+          <div><dt>FR · EN</dt><dd>langues prises en charge</dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <figure class="shot">
+      <div class="embed">
+        <iframe src="https://www.youtube-nocookie.com/embed/vjoIUP63a10" title="Nelli The Seer, bande-annonce" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+      </div>
+      <figcaption class="mono">Bande-annonce de Nelli The Seer. <a href="https://youtu.be/vjoIUP63a10" rel="noopener">Voir sur YouTube&nbsp;↗</a></figcaption>
+    </figure>`,
+      },
+      en: {
+        list: "Rebinding, Steam achievements, localization",
+        preview: "Input rebinding, Steam achievements and FR/EN localization on two student games released on Steam: Nelli The Seer and Despair.",
+        sub: "Input rebinding, Steam achievements and French / English localization for two student games released on Steam.",
+        meta: [
+          ["Context", "Student games released on Steam"],
+          ["Publisher", "Objectif 3D"],
+          ["Systems", "Rebinding, achievements, localization"],
+          ["Steam", '<a href="https://store.steampowered.com/app/3801320/Nelli_The_Seer/" rel="noopener">Nelli The Seer</a>, <a href="https://store.steampowered.com/app/4456120/Despair/" rel="noopener">Despair</a>'],
+        ],
+        body: `
+    <figure class="shot">
+      <img src="assets/img/rebind-nelli.png" alt="Nelli The Seer's “Key configuration” menu (in French): movement and interaction, Back and Reset buttons" width="1920" height="1080">
+      <figcaption class="mono">Nelli The Seer's key configuration menu (shown in French).</figcaption>
+    </figure>
+
+    <div class="case__body">
+      <div class="prose">
+        <!-- À COMPLÉTER : moteur, détails techniques (sauvegarde des touches, API Steamworks, tables de traduction), ce qui était difficile -->
+        <p>
+          Two student games released for free on Steam by the school Objectif 3D: <strong>Nelli The Seer</strong>
+          (July 2025), a third-person platformer set in the Templo Mayor, and <strong>Despair</strong>
+          (September 2026), a stealth game set in a cursed Constantinople. On both, I built the same three systems that
+          players expect from a game on Steam:
+        </p>
+        <ul class="plain">
+          <li><b>input rebinding</b>: the player reassigns their controls from a configuration menu
+            (movement, interaction), with a button to reset everything;</li>
+          <li><b>Steam achievements</b>: Despair has 8;</li>
+          <li><b>localization</b>: both games are playable in French and English.</li>
+        </ul>
+      </div>
+
+      <aside class="notes">
+        <h4 class="mono notes__h">The two games</h4>
+        <ul class="notes__list">
+          <li><b>Nelli The Seer</b>, third-person platformer and memory game, released July 8, 2025.
+            <a href="https://store.steampowered.com/app/3801320/Nelli_The_Seer/" rel="noopener">Steam&nbsp;↗</a></li>
+          <li><b>Despair</b>, third-person stealth game, released September 29, 2026.
+            <a href="https://store.steampowered.com/app/4456120/Despair/" rel="noopener">Steam&nbsp;↗</a></li>
+        </ul>
+
+        <h4 class="mono notes__h">In numbers</h4>
+        <dl class="figures">
+          <div><dt>2</dt><dd>games released on Steam</dd></div>
+          <div><dt>8</dt><dd>Steam achievements in Despair</dd></div>
+          <div><dt>FR · EN</dt><dd>supported languages</dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <figure class="shot">
+      <div class="embed">
+        <iframe src="https://www.youtube-nocookie.com/embed/vjoIUP63a10" title="Nelli The Seer, trailer" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+      </div>
+      <figcaption class="mono">Nelli The Seer trailer. <a href="https://youtu.be/vjoIUP63a10" rel="noopener">Watch on YouTube&nbsp;↗</a></figcaption>
     </figure>`,
       },
     },

@@ -55,7 +55,7 @@
 
     const sheet = u.sheet.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
 
-    const cvBtn = `<a class="cv-btn mono" href="assets/cv-oronte-soler.pdf" download="${u.cvFile}"><span>${u.cv}</span><small>${u.cvMeta}</small></a>`;
+    const cvBtn = `<a class="btn mono" href="assets/cv-oronte-soler.pdf" download="${u.cvFile}"><span>${u.cv}</span><small>${u.cvMeta}</small></a>`;
 
     const f = SITE.flagship;
     const fd = f[lang];
@@ -116,7 +116,6 @@ ${flagship}
     <div class="contact__links">
       <a class="contact__mail" href="mailto:rontou06@gmail.com" data-copy="rontou06@gmail.com" data-copied-label="${u.copied}">rontou06@gmail.com</a>
       <a class="mono" href="https://github.com/Oronte">GitHub ↗</a>
-      ${cvBtn}
     </div>
   </section>`;
   }
