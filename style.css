@@ -208,6 +208,32 @@ kbd { border: 1px solid var(--rule); border-bottom-width: 2px; }
   .index__y { grid-column: auto; grid-row: auto; text-align: right; }
 }
 
+/* ---------- avis clients ---------- */
+#avis { padding-bottom: 120px; }
+.reviews {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 720px) { .reviews { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px; } }
+@media (min-width: 1000px) { .reviews { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.review[hidden] { display: none; }
+.reviews__more { margin-top: 28px; cursor: pointer; font-size: 12px; }
+.review {
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 26px 0 28px; border-bottom: 1px solid var(--rule);
+}
+.review__stars { display: flex; gap: 3px; font-size: 20px; line-height: 1; }
+.star { color: var(--rule); }
+.star.is-on { color: var(--accent); }
+.review__q { margin: 0; quotes: "\00ab\00a0" "\00a0\00bb"; }
+.review__q:lang(en) { quotes: "\201c" "\201d"; }
+.review__q p { margin: 0; font-size: 19px; line-height: 1.45; font-weight: 500; letter-spacing: -.005em; max-width: 44ch; }
+.review__q p::before { content: open-quote; color: var(--accent); }
+.review__q p::after { content: close-quote; color: var(--accent); }
+.review__who { margin: auto 0 0; display: flex; flex-direction: column; gap: 2px; font-size: 15px; }
+.review__who b { font-weight: 700; }
+.review__who .mono { font-size: 12px; }
+
 /* aperçu au survol d'un projet */
 .preview {
   position: fixed; left: 0; top: 0; z-index: 20;

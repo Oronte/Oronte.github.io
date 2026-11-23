@@ -1,7 +1,7 @@
 // Rendu du site : langue (FR / EN), liste de projets, aperçu au survol, pages projet.
 // Les textes sont dans content.js.
 (() => {
-  const SECTIONS = ["projets", "parcours", "contact"];
+  const SECTIONS = ["projets", "avis", "parcours", "contact"];
   const app = document.getElementById("app");
   const previewEl = document.getElementById("preview");
   const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
@@ -29,6 +29,56 @@
     const group = document.querySelector(".lang");
     if (group) group.setAttribute("aria-label", u.langLabel);
     document.querySelector('meta[name="description"]').setAttribute("content", u.docDesc);
+  }
+
+  // ---------------------------------------------------------------- avis clients
+  // Les avis viennent de avis.js (window.AVIS) ; les entrées incomplètes sont ignorées.
+  SITE.reviews = ((window.AVIS && window.AVIS.reviews) || [])
+    .filter((r) => r && r.name && Number.isFinite(Number(r.rating)) && r.comment)
+    .map((r) => ({ ...r, rating: Number(r.rating) }));
+
+  const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  // un texte simple ou { fr, en } : on prend la langue courante, sinon l'autre
+  const pick = (v) => (v && typeof v === "object" ? (v[lang] ?? v.fr ?? v.en ?? "") : (v ?? ""));
+
+  // Les 3 premiers avis sont visibles ; les suivants se déroulent au clic (l'état survit au changement de langue)
+  const REVIEWS_SHOWN = 3;
+  let reviewsOpen = false;
+
+  // Renvoie le HTML de la section, ou rien tant qu'il n'y a aucun avis dans content.js
+  function renderReviews() {
+    const list = SITE.reviews || [];
+    if (!list.length) return "";
+    const u = ui();
+    const avg = (list.reduce((t, r) => t + r.rating, 0) / list.length).toFixed(1).replace(".", lang === "fr" ? "," : ".");
+
+    const extra = Math.max(0, list.length - REVIEWS_SHOWN);
+    const cards = list.map((r, i) => {
+      const rating = Math.max(0, Math.min(5, Math.round(r.rating)));
+      const stars = Array.from({ length: 5 }, (_, i) => `<span class="star${i < rating ? " is-on" : ""}" aria-hidden="true">★</span>`).join("");
+      // un commentaire écrit dans une seule langue garde sa langue d'origine pour les lecteurs d'écran
+      const langAttr = typeof r.comment === "string" ? ` lang="${esc(r.lang || "fr")}"` : "";
+      const ctx = pick(r.context);
+      const src = r.source ? (r.url ? `<a href="${esc(r.url)}" rel="noopener">${esc(r.source)}&nbsp;↗</a>` : esc(r.source)) : "";
+      const foot = [ctx && esc(ctx), src].filter(Boolean).join(" · ");
+      const hidden = i >= REVIEWS_SHOWN && !reviewsOpen ? " hidden" : "";
+      return `<li class="review"${i >= REVIEWS_SHOWN ? " data-extra" : ""}${hidden}>
+        <div class="review__stars" role="img" aria-label="${esc(u.ratingLabel(rating))}">${stars}</div>
+        <blockquote class="review__q"${langAttr}><p>${esc(pick(r.comment))}</p></blockquote>
+        <p class="review__who"><b>${esc(r.name)}</b>${foot ? `<span class="mono muted">${foot}</span>` : ""}</p>
+      </li>`;
+    }).join("");
+
+    return `
+  <section id="avis" class="wrap">
+    <div class="sect-head">
+      <h2 class="sect-title">${u.reviewsTitle}</h2>
+      <span class="mono muted">${u.reviewsCount(list.length, avg)}</span>
+    </div>
+    <ul class="reviews" id="reviews-list">${cards}</ul>
+    ${extra ? `<button type="button" class="btn reviews__more mono" data-reviews-toggle aria-expanded="${reviewsOpen}" aria-controls="reviews-list">${reviewsOpen ? u.reviewsLess : u.reviewsMore(extra)}</button>` : ""}
+  </section>
+`;
   }
 
   // ---------------------------------------------------------------- rendu
@@ -103,6 +153,7 @@ ${flagship}
     <ol class="index">${items}</ol>
   </section>
 
+${renderReviews()}
   <section id="parcours" class="wrap">
     <div class="sect-head">
       <h2 class="sect-title">${u.pathTitle}</h2>
@@ -276,6 +327,17 @@ ${flagship}
   document.addEventListener("click", async (e) => {
     const langBtn = e.target.closest("[data-lang]");
     if (langBtn) { setLang(langBtn.dataset.lang); return; }
+
+    // « Voir les autres avis » : on déroule ou on replie la suite de la liste
+    const more = e.target.closest("[data-reviews-toggle]");
+    if (more) {
+      reviewsOpen = !reviewsOpen;
+      const extras = document.querySelectorAll(".review[data-extra]");
+      extras.forEach((li) => { li.hidden = !reviewsOpen; });
+      more.setAttribute("aria-expanded", String(reviewsOpen));
+      more.textContent = reviewsOpen ? ui().reviewsLess : ui().reviewsMore(extras.length);
+      return;
+    }
 
     // lien interne vers la page où l'on est déjà : le hash ne change pas, on relance quand même le défilement
     const link = e.target.closest('a[href^="#/"]');

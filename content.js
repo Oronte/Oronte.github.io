@@ -57,6 +57,11 @@ const SITE = {
       projectsTitle: "Projets",
       projectsCount: (n) => `${n} entrées`,
       projectsHint: "Clique sur un projet pour voir sa page complète.",
+      reviewsTitle: "Avis clients",
+      reviewsCount: (n, avg) => `${n} avis · ${avg}/5`,
+      ratingLabel: (r) => `Note : ${r} sur 5`,
+      reviewsMore: (n) => `Voir ${n > 1 ? `les ${n} autres avis` : "l’autre avis"}`,
+      reviewsLess: "Masquer les autres avis",
       pathTitle: "Parcours",
       back: "Projets",
       next: "Projet suivant",
@@ -89,6 +94,11 @@ const SITE = {
       projectsTitle: "Projects",
       projectsCount: (n) => `${n} entries`,
       projectsHint: "Click a project to open its full page.",
+      reviewsTitle: "Client reviews",
+      reviewsCount: (n, avg) => `${n} ${n > 1 ? "reviews" : "review"} · ${avg}/5`,
+      ratingLabel: (r) => `Rating: ${r} out of 5`,
+      reviewsMore: (n) => `Show ${n > 1 ? `${n} more reviews` : "1 more review"}`,
+      reviewsLess: "Hide the other reviews",
       pathTitle: "Background",
       back: "Projects",
       next: "Next project",
@@ -100,6 +110,23 @@ const SITE = {
       noscript: "This site needs JavaScript to display.",
     },
   },
+
+  // ======================================================================
+  //  Avis clients
+  //  Les vrais avis se saisissent dans avis.js : ce tableau n'est que le repli.
+  //  La section n'apparaît que s'il y a au moins un avis. N'y mets que de vrais avis.
+  //  Modèle d'une entrée :
+  //    {
+  //      name: "Prénom N.",                 // nom affiché
+  //      context: { fr: "Projet X", en: "Project X" },   // facultatif : de quoi il s'agit
+  //      rating: 5,                         // note de 1 à 5
+  //      comment: { fr: "…", en: "…" },     // le commentaire (une simple chaîne marche aussi)
+  //      lang: "fr",                        // facultatif : langue d'origine si le commentaire est une chaîne
+  //      source: "Malt",                    // facultatif : où l'avis a été laissé
+  //      url: "https://…",                  // facultatif : lien vers l'avis d'origine
+  //    }
+  // ======================================================================
+  reviews: [],
 
   // ======================================================================
   //  Parcours
