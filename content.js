@@ -2,20 +2,6 @@
 // Pour modifier un texte : change-le ici, main.js s'occupe du reste.
 
 // ---------- Blocs de code partagés entre les deux langues ----------
-const CODE_KRAMPUS = (comment1, comment2) => `<pre class="code"><code><span class="c">// MovementComponent.h</span>
-<span class="k">class</span> MovementComponent : <span class="k">public</span> Component
-{
-    KCOMPONENT(MovementComponent, Component)
-
-<span class="k">public</span>:
-    MovementComponent(Actor* _owner);
-
-    KPROPERTY(Float, moveSpeed) = <span class="n">1.f</span>;  <span class="c">// ${comment1}</span>
-
-    KFUNCTION(MoveLeft)                 <span class="c">// ${comment2}</span>
-    <span class="k">void</span> MoveLeft();
-};</code></pre>`;
-
 const CODE_ADHAFERA = (comment1, comment2) => `<pre class="code"><code><span class="k">struct</span> FADF_ShotPlan
 {
     TArray&lt;FADF_BoneHit&gt; targets;
@@ -201,89 +187,10 @@ const SITE = {
           ["Cadre", "Projet personnel"],
           ["Équipe", "Seul"],
           ["Depuis", "Nov. 2025"],
+          ["Plateforme", "Windows · Visual Studio · CMake"],
           ["Code", '<a href="https://github.com/Oronte/KrampusEngine">github.com/Oronte/KrampusEngine</a>'],
         ],
-        body: `
-    <figure class="shot">
-      <img src="assets/img/Editor.png" alt="L'éditeur de KrampusEngine : hiérarchie, viewport, explorateur de contenu et console" width="1600" height="900">
-      <figcaption class="mono">L'éditeur. Viewport, hiérarchie, contenu, console. Tout est fait avec Dear ImGui.</figcaption>
-    </figure>
-
-    <div class="case__body">
-      <div class="prose">
-        <p>
-          Je voulais comprendre ce qu'il y a sous un moteur commercial. Alors j'en ai écrit un, couche par couche&nbsp;:
-          boucle de jeu, acteurs et composants, système de réflexion, format de scène, physique, réseau, et
-          l'éditeur par-dessus.
-        </p>
-        <p>
-          Le flux de travail ressemble à celui d'Unreal. On place les acteurs dans l'éditeur, on écrit le gameplay en C++,
-          on appuie sur <kbd>F7</kbd>&nbsp;: le module de jeu est recompilé en tâche de fond et rechargé, sans perdre la scène
-          en cours, même non sauvegardée. Un bouton <em>Play</em> lance la scène&nbsp;; <em>Stop</em> la remet exactement comme avant.
-        </p>
-        <p>
-          La réflexion tient en quelques macros, sans génération de code. Une propriété déclarée avec
-          <code>KPROPERTY</code> apparaît dans l'inspecteur et se sauvegarde dans la scène. Une fonction marquée
-          <code>KFUNCTION</code> peut être branchée sur une touche, un bouton ou un message réseau depuis l'éditeur.
-        </p>
-
-        ${CODE_KRAMPUS("inspecteur + sauvegarde", "branchable sur une entrée")}
-
-        <p>
-          Pour tester le moteur sur un vrai jeu, j'ai fait <strong>Krampus Night</strong>&nbsp;: un shooter en arène,
-          vagues de démons, jouable seul ou en coopération. Le mode solo et le mode coop passent par le même code&nbsp;:
-          hors ligne, le spawn réseau crée simplement l'acteur en local.
-        </p>
-      </div>
-
-      <aside class="notes">
-        <h4 class="mono notes__h">Ce qu'il contient</h4>
-        <ul class="notes__list">
-          <li>Éditeur&nbsp;: viewport, hiérarchie, inspecteur, contenu, console, undo / redo, gizmo</li>
-          <li>Éditeurs dédiés&nbsp;: animation, machine à états, formes de collision</li>
-          <li>Physique box2d 3.1, polygones concaves découpés en convexes</li>
-          <li>Réseau TCP + UDP&nbsp;: hôte, découverte LAN, acteurs répliqués, RPC</li>
-          <li>Particules en pool, un draw call par émetteur</li>
-          <li>Lumières 2D et ombres, gameplay tags hiérarchiques</li>
-          <li>Rapport de crash avec minidump et pile d'appels</li>
-          <li>Export&nbsp;: un exe, un <code>.pak</code>, les DLL runtime</li>
-        </ul>
-
-        <h4 class="mono notes__h">En chiffres</h4>
-        <dl class="figures">
-          <div><dt>~45&nbsp;000</dt><dd>lignes de C++ (moteur + éditeur)</dd></div>
-          <div><dt>0,2&nbsp;ms</dt><dd>CPU pour 10&nbsp;000 particules en Release</dd></div>
-          <div><dt>143</dt><dd>commits</dd></div>
-        </dl>
-      </aside>
-    </div>
-
-    <div class="lessons">
-      <h4 class="mono notes__h">Problèmes rencontrés</h4>
-      <div class="lessons__grid">
-        <div>
-          <p class="lessons__q">Le rechargement à chaud échouait une fois sur deux.</p>
-          <p>Visual Studio gardait le fichier PDB verrouillé tant que la DLL était chargée. L'éditeur copie maintenant la DLL
-          sous un nom unique avant de la charger, et chaque édition de liens produit un PDB au nom horodaté.</p>
-        </div>
-        <div>
-          <p class="lessons__q">Crash quand une balle tuait un démon.</p>
-          <p>L'acteur était détruit à l'intérieur du callback de collision de box2d. Les destructions sont maintenant notées
-          pendant le callback et faites au <code>Tick</code> suivant.</p>
-        </div>
-        <div>
-          <p class="lessons__q">Le jeu se figeait en multijoueur.</p>
-          <p>Une réception UDP bloquante attendait un paquet qui n'arrivait jamais. Toutes les sockets sont non bloquantes,
-          et un test d'intégration lance un vrai hôte et un vrai client en boucle locale.</p>
-        </div>
-      </div>
-    </div>
-
-    <figure class="shot shot--duo">
-      <img src="assets/img/Input.gif" alt="Démo du système d'entrées : déplacement ZQSD et tir à la souris" loading="lazy">
-      <img src="assets/img/ConsoleLog.png" alt="Console de l'éditeur avec filtres de verbosité" loading="lazy">
-      <figcaption class="mono">Entrées liées depuis l'inspecteur, sans code de liaison · Console filtrable par catégorie et verbosité.</figcaption>
-    </figure>`,
+        body: KRAMPUS_BODY.fr,
       },
       en: {
         list: "2D engine and editor",
@@ -293,89 +200,10 @@ const SITE = {
           ["Context", "Personal project"],
           ["Team", "Solo"],
           ["Since", "Nov. 2025"],
+          ["Platform", "Windows · Visual Studio · CMake"],
           ["Code", '<a href="https://github.com/Oronte/KrampusEngine">github.com/Oronte/KrampusEngine</a>'],
         ],
-        body: `
-    <figure class="shot">
-      <img src="assets/img/Editor.png" alt="The KrampusEngine editor: hierarchy, viewport, content browser and console" width="1600" height="900">
-      <figcaption class="mono">The editor. Viewport, hierarchy, content, console. All built with Dear ImGui.</figcaption>
-    </figure>
-
-    <div class="case__body">
-      <div class="prose">
-        <p>
-          I wanted to understand what sits under a commercial engine. So I wrote one, layer by layer:
-          game loop, actors and components, reflection system, scene format, physics, networking, and
-          the editor on top.
-        </p>
-        <p>
-          The workflow looks like Unreal's. You place actors in the editor, write gameplay in C++,
-          and press <kbd>F7</kbd>: the game module is rebuilt in the background and reloaded, without losing the current scene,
-          even unsaved. A <em>Play</em> button runs the scene; <em>Stop</em> puts it back exactly as it was.
-        </p>
-        <p>
-          Reflection fits in a few macros, with no code generation. A property declared with
-          <code>KPROPERTY</code> shows up in the inspector and is saved in the scene. A function marked
-          <code>KFUNCTION</code> can be bound to a key, a button or a network message from the editor.
-        </p>
-
-        ${CODE_KRAMPUS("inspector + save", "bindable to an input")}
-
-        <p>
-          To test the engine on a real game, I made <strong>Krampus Night</strong>: an arena shooter,
-          waves of demons, playable solo or in co-op. Solo and co-op go through the same code:
-          offline, the network spawn simply creates the actor locally.
-        </p>
-      </div>
-
-      <aside class="notes">
-        <h4 class="mono notes__h">What it contains</h4>
-        <ul class="notes__list">
-          <li>Editor: viewport, hierarchy, inspector, content browser, console, undo / redo, gizmo</li>
-          <li>Dedicated editors: animation, state machine, collision shapes</li>
-          <li>box2d 3.1 physics, concave polygons split into convex ones</li>
-          <li>TCP + UDP networking: host, LAN discovery, replicated actors, RPC</li>
-          <li>Pooled particles, one draw call per emitter</li>
-          <li>2D lights and shadows, hierarchical gameplay tags</li>
-          <li>Crash report with minidump and call stack</li>
-          <li>Export: one exe, one <code>.pak</code>, the runtime DLLs</li>
-        </ul>
-
-        <h4 class="mono notes__h">In numbers</h4>
-        <dl class="figures">
-          <div><dt>~45,000</dt><dd>lines of C++ (engine + editor)</dd></div>
-          <div><dt>0.2&nbsp;ms</dt><dd>CPU for 10,000 particles in Release</dd></div>
-          <div><dt>143</dt><dd>commits</dd></div>
-        </dl>
-      </aside>
-    </div>
-
-    <div class="lessons">
-      <h4 class="mono notes__h">Problems I ran into</h4>
-      <div class="lessons__grid">
-        <div>
-          <p class="lessons__q">Hot reload failed one time out of two.</p>
-          <p>Visual Studio kept the PDB file locked as long as the DLL was loaded. The editor now copies the DLL
-          under a unique name before loading it, and every link step produces a timestamped PDB.</p>
-        </div>
-        <div>
-          <p class="lessons__q">Crash when a bullet killed a demon.</p>
-          <p>The actor was destroyed inside box2d's collision callback. Destructions are now recorded
-          during the callback and carried out on the next <code>Tick</code>.</p>
-        </div>
-        <div>
-          <p class="lessons__q">The game froze in multiplayer.</p>
-          <p>A blocking UDP receive was waiting for a packet that never came. All sockets are now non-blocking,
-          and an integration test runs a real host and a real client over loopback.</p>
-        </div>
-      </div>
-    </div>
-
-    <figure class="shot shot--duo">
-      <img src="assets/img/Input.gif" alt="Input system demo: WASD movement and mouse shooting" loading="lazy">
-      <img src="assets/img/ConsoleLog.png" alt="Editor console with verbosity filters" loading="lazy">
-      <figcaption class="mono">Inputs bound from the inspector, no binding code · Console filterable by category and verbosity.</figcaption>
-    </figure>`,
+        body: KRAMPUS_BODY.en,
       },
     },
 
